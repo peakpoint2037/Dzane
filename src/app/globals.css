@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #2a2a30;
+
+  --color-cream: #ffffff;
+  --color-cream-dark: #ece4fa;
+  --color-lavender: #ece4fa;
+  --color-lavender-dark: #d9c9f2;
+  --color-olive: #2c2e1f;
+  --color-olive-light: #3d3f2a;
+  --color-ink: #2a2a30;
+  --color-gold: #7a1f34;
+  --color-gold-light: #a83250;
+  --color-gold-dark: #4a0f1f;
+  --color-plum: #6b3fa0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--color-cream);
+  --color-cream-dark: var(--color-cream-dark);
+  --color-lavender: var(--color-lavender);
+  --color-lavender-dark: var(--color-lavender-dark);
+  --color-olive: var(--color-olive);
+  --color-olive-light: var(--color-olive-light);
+  --color-ink: var(--color-ink);
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-gold-dark: var(--color-gold-dark);
+  --color-plum: var(--color-plum);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: 150% 0;
+  }
+}
+
+.text-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-dark) 30%,
+    var(--color-gold-light) 45%,
+    var(--color-gold) 55%,
+    var(--color-gold-dark) 70%
+  );
+  background-size: 250% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shimmer 3.5s ease-in-out infinite;
+}
