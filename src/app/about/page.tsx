@@ -22,7 +22,7 @@ const values = [
   {
     icon: ShieldIcon,
     title: "Family You Can Trust",
-    text: "A mother-and-son business — one hand on the needle, one hand on getting your order to you safely.",
+    text: "This is Usha Balan's website — her hands on the needle, her name behind every stitch you wear.",
   },
 ];
 
@@ -33,7 +33,7 @@ export default function AboutPage() {
       <main className="flex-1 bg-cream">
         <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
           <p className="text-center font-serif text-sm italic text-gold">
-            Our Story
+            Tailored Grace, Timeless Fit
           </p>
           <h1 className="mt-2 text-center font-serif text-3xl text-ink sm:text-4xl">
             Where DZANE Began
@@ -52,20 +52,28 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-4 text-sm leading-relaxed text-ink/70 sm:text-base">
-              <p>
-                DZANE began at a sewing machine, long before it was ever a
-                brand. For years, our mother has been the quiet hands behind
-                hundreds of perfectly fitted churidars, sarees and blouses in
-                her own tailoring studio. Neighbours would bring in fabric,
-                and she&apos;d send them home with something that fit like it
-                was made only for them &mdash; because it was.
+              <p className="font-serif text-sm italic text-gold">
+                Usha Balan &mdash; Founder &amp; Owner, DZANE
               </p>
               <p>
-                DZANE is that same care, grown into something bigger. While
-                she continues to stitch every custom order by hand, we&apos;ve
-                built a home online for her work &mdash; bringing premium
-                ladies wear and honest tailoring to more women, without
-                losing what made her shop special in the first place.
+                Twenty years ago, Usha Balan sat down at a sewing machine in
+                her home and began stitching for the women around her
+                &mdash; one measurement, one fitting, one perfectly
+                finished piece at a time. What she built quietly, as
+                Sreelakshmi Collections, has grown stitch by stitch into a
+                small business trusted by over 200 customers who return to
+                her, order after order, for the same reason: her experience
+                is the promise no machine or trend can replace.
+              </p>
+              <p>
+                Today, that life&apos;s work is stepping into a new chapter as
+                DZANE &mdash; still led by the same hands, now reaching you
+                online through Instagram, Facebook and WhatsApp, and soon
+                welcoming you in person at our new store in
+                Cheriyapallithazham, Kothamangalam. Our dream doesn&apos;t
+                stop there &mdash; we want to carry this same trust from town
+                to town across Kerala, so that wherever you find us, DZANE
+                feels like it was made close to home.
               </p>
               <p className="font-serif text-lg italic text-gold">
                 Every DZANE piece still carries that same promise: elegance
