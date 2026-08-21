@@ -22,7 +22,7 @@ const values = [
   {
     icon: ShieldIcon,
     title: "Family You Can Trust",
-    text: "This is Usha Balan's website — her hands on the needle, her name behind every stitch you wear.",
+    text: "This is my website — my hands on the needle, my name behind every stitch you wear.",
   },
 ];
 
@@ -56,28 +56,28 @@ export default function AboutPage() {
                 Usha Balan &mdash; Founder &amp; Owner, DZANE
               </p>
               <p>
-                Twenty years ago, Usha Balan sat down at a sewing machine in
-                her home and began stitching for the women around her
-                &mdash; one measurement, one fitting, one perfectly
-                finished piece at a time. What she built quietly, as
-                Sreelakshmi Collections, has grown stitch by stitch into a
-                small business trusted by over 200 customers who return to
-                her, order after order, for the same reason: her experience
-                is the promise no machine or trend can replace.
+                Twenty years ago, I sat down at a sewing machine in my home
+                and began stitching for the women around me &mdash; one
+                measurement, one fitting, one perfectly finished piece at a
+                time. What I built quietly, as Sreelakshmi Collections, has
+                grown stitch by stitch into a small business I&apos;m proud
+                of, trusted by over 200 customers who return to me, order
+                after order, for the same reason: my experience is the
+                promise no machine or trend can replace.
               </p>
               <p>
-                Today, that life&apos;s work is stepping into a new chapter as
+                Today, my life&apos;s work is stepping into a new chapter as
                 DZANE &mdash; still led by the same hands, now reaching you
                 online through Instagram, Facebook and WhatsApp, and soon
-                welcoming you in person at our new store in
-                Cheriyapallithazham, Kothamangalam. Our dream doesn&apos;t
-                stop there &mdash; we want to carry this same trust from town
+                welcoming you in person at my new store in
+                Cheriyapallithazham, Kothamangalam. My dream doesn&apos;t
+                stop there &mdash; I want to carry this same trust from town
                 to town across Kerala, so that wherever you find us, DZANE
                 feels like it was made close to home.
               </p>
               <p className="font-serif text-lg italic text-gold">
-                Every DZANE piece still carries that same promise: elegance
-                in every stitch.
+                Every piece I make still carries that same promise &mdash;
+                elegance in every stitch.
               </p>
             </div>
           </div>
