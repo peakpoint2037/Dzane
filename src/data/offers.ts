@@ -9,7 +9,7 @@ export const offers: Offer[] = [
     icon: "gift",
     title: "Loyalty Reward",
     description:
-      "Every 5th purchase or custom stitching order is 50% off — our thank-you for staying with DZANE.",
+      "Cross ₹5,000 in total purchases and get 50% off your next order — our thank-you for staying with DZANE.",
   },
   {
     icon: "star",
