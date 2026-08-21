@@ -39,6 +39,10 @@ yarn-error.log*
 # claude code local settings
 .claude/settings.local.json
 
+# scratch / generated business documents (not site source)
+/output/
+/tmp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
