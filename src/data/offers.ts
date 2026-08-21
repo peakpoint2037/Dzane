@@ -7,9 +7,9 @@ export type Offer = {
 export const offers: Offer[] = [
   {
     icon: "gift",
-    title: "Loyalty Reward",
+    title: "Points & Rewards",
     description:
-      "Cross ₹5,000 in total purchases and get 50% off your next order — our thank-you for staying with DZANE.",
+      "Earn 5 points for every ₹100 you spend. 1 point = ₹1 — redeem your points as cash on your next order once you reach 100 points.",
   },
   {
     icon: "star",
