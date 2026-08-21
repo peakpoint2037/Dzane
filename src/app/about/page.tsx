@@ -40,14 +40,14 @@ export default function AboutPage() {
           </h1>
 
           <div className="mt-12 grid items-center gap-10 sm:grid-cols-2">
-            <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-lg shadow-lg">
+            <div className="relative mx-auto aspect-[792/631] w-full max-w-md overflow-hidden rounded-lg shadow-lg">
               <Image
                 src="/images/about-founder.jpg"
                 alt="Founder stitching a custom order at the DZANE tailoring studio"
                 fill
                 quality={90}
                 sizes="(min-width: 640px) 500px, 100vw"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
 
