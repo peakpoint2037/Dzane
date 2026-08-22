@@ -3,13 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
+import SiteSearch from "./SiteSearch";
 import { navLinks } from "@/data/nav";
 import {
   LeafIcon,
   ScissorsIcon,
   HeartIcon,
   TruckIcon,
-  SearchIcon,
   UserIcon,
   BagIcon,
   MenuIcon,
@@ -66,9 +66,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-5 text-ink">
-          <button type="button" aria-label="Search" className="hover:text-gold">
-            <SearchIcon className="h-5 w-5" />
-          </button>
+          <SiteSearch />
           <Link href="/account" aria-label="Account" className="hover:text-gold">
             <UserIcon className="h-5 w-5" />
           </Link>

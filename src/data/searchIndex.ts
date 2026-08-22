@@ -1,0 +1,127 @@
+export type SearchEntry = {
+  title: string;
+  href: string;
+  description: string;
+  keywords: string[];
+};
+
+export const searchIndex: SearchEntry[] = [
+  {
+    title: "Churidars",
+    href: "/shop/churidars",
+    description: "Pick a fabric by price tier and we stitch it to your size.",
+    keywords: ["churidar", "churidars", "salwar", "kameez", "stitching"],
+  },
+  {
+    title: "Nighties & Loungewear",
+    href: "/shop/nighties-loungewear",
+    description: "Fabric by price tier, stitched to your size.",
+    keywords: ["nighty", "nighties", "loungewear", "nightwear", "sleepwear"],
+  },
+  {
+    title: "Sarees",
+    href: "/shop/sarees",
+    description: "Ready-made sarees with the blouse stitched to match.",
+    keywords: ["saree", "sarees", "blouse", "blouse stitching"],
+  },
+  {
+    title: "Readymade Wear",
+    href: "/shop/readymade-wear",
+    description: "Finished pieces, ready to wear — no stitching needed.",
+    keywords: ["readymade", "ready made", "premium wear", "dress", "dresses"],
+  },
+  {
+    title: "Women's Jewellery",
+    href: "/#family-wear",
+    description: "Earrings, bangles & necklace sets.",
+    keywords: ["jewellery", "jewelry", "earrings", "bangles", "necklace"],
+  },
+  {
+    title: "Kids Wear",
+    href: "/#family-wear",
+    description: "Comfy, playful & festive picks for kids.",
+    keywords: ["kids", "children", "kids wear", "festive"],
+  },
+  {
+    title: "Men's Wear",
+    href: "/#family-wear",
+    description: "Shirts, kurtas & ethnic sets.",
+    keywords: ["men", "mens", "men's wear", "shirts", "kurtas"],
+  },
+  {
+    title: "About Us",
+    href: "/about",
+    description: "Our story — founder Usha Balan and DZANE's journey.",
+    keywords: [
+      "about",
+      "founder",
+      "usha balan",
+      "story",
+      "sreelakshmi collections",
+      "history",
+    ],
+  },
+  {
+    title: "Visit Our Studio",
+    href: "/#visit-studio",
+    description: "Our stitching studio in Cheriyapallithazham, Kothamangalam.",
+    keywords: ["studio", "visit", "location", "address", "kothamangalam", "store"],
+  },
+  {
+    title: "Offers & Rewards",
+    href: "/#offers-heading",
+    description: "Points & rewards, welcome offer, referrals and free shipping.",
+    keywords: [
+      "offers",
+      "rewards",
+      "points",
+      "discount",
+      "loyalty",
+      "referral",
+      "refer",
+      "welcome offer",
+      "free shipping",
+    ],
+  },
+  {
+    title: "Customer Reviews",
+    href: "/#customer-reviews",
+    description: "Real reviews from women who've worn DZANE.",
+    keywords: ["reviews", "testimonials", "feedback", "ratings"],
+  },
+  {
+    title: "Happy Customers",
+    href: "/#happy-customers",
+    description: "Real women, real DZANE pieces.",
+    keywords: ["customers", "photos", "gallery", "happy customers"],
+  },
+  {
+    title: "How We Work",
+    href: "/#how-we-work",
+    description: "3 ways to shop with us — ready-made, fabric + stitching, or bring your own fabric.",
+    keywords: [
+      "how it works",
+      "custom stitching",
+      "tailoring",
+      "bring your own fabric",
+      "fabric",
+      "process",
+    ],
+  },
+  {
+    title: "Contact & Support",
+    href: "/#trust-bar",
+    description: "Shipping, returns, customer support and payment info.",
+    keywords: [
+      "contact",
+      "support",
+      "whatsapp",
+      "phone",
+      "shipping",
+      "returns",
+      "payment",
+      "upi",
+      "gpay",
+    ],
+  },
+];
