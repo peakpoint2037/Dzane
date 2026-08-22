@@ -40,7 +40,7 @@ export default function FamilyWearSection() {
             Jewellery, Kids &amp; Men&apos;s collections
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4">
           {items.map((item) => (
             <Link
               key={item.href}
@@ -60,7 +60,7 @@ export default function FamilyWearSection() {
                     alt={item.title}
                     fill
                     quality={90}
-                    sizes="(min-width: 1024px) 15vw, 40vw"
+                    sizes="(min-width: 1024px) 15vw, 33vw"
                     className="object-cover"
                   />
                 ) : (
@@ -69,12 +69,14 @@ export default function FamilyWearSection() {
                   </span>
                 )}
               </div>
-              <div className="p-4">
-                <h3 className="font-serif text-base leading-snug text-ink">
+              <div className="p-2 sm:p-4">
+                <h3 className="font-serif text-xs leading-snug text-ink sm:text-base">
                   {item.title}
                 </h3>
-                <p className="mt-0.5 text-xs text-ink/50">{item.subtitle}</p>
-                <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-gold transition-transform group-hover:translate-x-0.5">
+                <p className="mt-0.5 hidden text-xs text-ink/50 sm:block">
+                  {item.subtitle}
+                </p>
+                <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-gold transition-transform group-hover:translate-x-0.5 sm:text-xs">
                   Explore →
                 </span>
               </div>
