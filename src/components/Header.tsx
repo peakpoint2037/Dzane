@@ -18,7 +18,15 @@ import {
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [comingSoon, setComingSoon] = useState<"account" | "cart" | null>(
+    null
+  );
   const cartCount = 0;
+
+  function showComingSoon(which: "account" | "cart") {
+    setComingSoon(which);
+    setTimeout(() => setComingSoon((v) => (v === which ? null : v)), 2500);
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-cream">
@@ -69,15 +77,39 @@ export default function Header() {
           <button type="button" aria-label="Search" className="hover:text-gold">
             <SearchIcon className="h-5 w-5" />
           </button>
-          <Link href="/account" aria-label="Account" className="hover:text-gold">
-            <UserIcon className="h-5 w-5" />
-          </Link>
-          <Link href="/cart" aria-label="Cart" className="relative hover:text-gold">
-            <BagIcon className="h-5 w-5" />
-            <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-olive text-[10px] text-cream">
-              {cartCount}
-            </span>
-          </Link>
+          <div className="relative">
+            <button
+              type="button"
+              aria-label="Account"
+              onClick={() => showComingSoon("account")}
+              className="hover:text-gold"
+            >
+              <UserIcon className="h-5 w-5" />
+            </button>
+            {comingSoon === "account" && (
+              <span className="absolute right-0 top-full mt-2 w-max max-w-[160px] rounded-md bg-ink px-3 py-1.5 text-[11px] text-cream shadow-lg">
+                Coming soon — accounts aren&apos;t live yet
+              </span>
+            )}
+          </div>
+          <div className="relative">
+            <button
+              type="button"
+              aria-label="Cart"
+              onClick={() => showComingSoon("cart")}
+              className="relative hover:text-gold"
+            >
+              <BagIcon className="h-5 w-5" />
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-olive text-[10px] text-cream">
+                {cartCount}
+              </span>
+            </button>
+            {comingSoon === "cart" && (
+              <span className="absolute right-0 top-full mt-2 w-max max-w-[160px] rounded-md bg-ink px-3 py-1.5 text-[11px] text-cream shadow-lg">
+                Coming soon — order via WhatsApp for now
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
