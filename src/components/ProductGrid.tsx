@@ -1,19 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { PublicProduct } from "@/lib/products";
-import { whatsappContacts } from "@/data/contacts";
-
-const orderContact = whatsappContacts[0];
 
 function ProductCard({ product }: { product: PublicProduct }) {
-  const waHref = `https://wa.me/${orderContact.phone}?text=${encodeURIComponent(
-    `Hi DZANE! I'd like to order ${product.name} (${product.sku}).`
-  )}`;
-
   return (
-    <a
-      href={waHref}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/product/${product.id}`}
       className="group block overflow-hidden rounded-md border border-ink/10 bg-white/40 transition-shadow hover:shadow-md"
     >
       <div className="relative aspect-[3/4] bg-lavender">
@@ -36,6 +28,11 @@ function ProductCard({ product }: { product: PublicProduct }) {
             Out of Stock
           </span>
         )}
+        {product.imageCount > 1 && (
+          <span className="absolute bottom-2 right-2 rounded-sm bg-ink/70 px-2 py-0.5 text-[10px] text-cream">
+            +{product.imageCount - 1} photos
+          </span>
+        )}
       </div>
       <div className="p-3">
         <h3 className="font-serif text-sm leading-snug text-ink">
@@ -50,7 +47,7 @@ function ProductCard({ product }: { product: PublicProduct }) {
           ₹{product.sellingPrice}
         </p>
       </div>
-    </a>
+    </Link>
   );
 }
 

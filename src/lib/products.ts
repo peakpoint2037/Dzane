@@ -19,6 +19,18 @@ export type PublicProduct = {
   imageCount: number;
 };
 
+export type PublicProductImage = {
+  id: string;
+  imageUrl: string;
+  altText: string | null;
+  sortOrder: number;
+  isPrimary: boolean;
+};
+
+export type PublicProductDetail = PublicProduct & {
+  images: PublicProductImage[];
+};
+
 export type ProductQuery = {
   page?: number;
   limit?: number;
@@ -70,5 +82,24 @@ export async function fetchProducts(
     return json.data as ProductPage;
   } catch {
     return EMPTY_PAGE;
+  }
+}
+
+// Returns null for a missing/inactive product (404) or any fetch failure —
+// callers should render a not-found style fallback in that case.
+export async function fetchProduct(
+  id: string
+): Promise<PublicProductDetail | null> {
+  try {
+    const res = await fetch(`${API_BASE}/api/public/products/${id}`, {
+      signal: AbortSignal.timeout(15000),
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (!json?.success) return null;
+    return json.data as PublicProductDetail;
+  } catch {
+    return null;
   }
 }
