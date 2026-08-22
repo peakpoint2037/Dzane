@@ -9,7 +9,7 @@ export const metadata = {
     "Shop nighty fabric stitched to your size, or ready-made nighties by Nakshatra.",
 };
 
-const gallery = [
+const gallery: { src?: string; alt: string }[] = [
   {
     src: "/images/category-nighties-v2.png",
     alt: "Woman wearing lilac nightwear from DZANE",
@@ -17,6 +17,9 @@ const gallery = [
   {
     src: "/images/hero-banner-lavender.png",
     alt: "Woman wearing lavender nightwear from DZANE",
+  },
+  {
+    alt: "More fabric options",
   },
 ];
 
@@ -84,21 +87,27 @@ export default function NightiesPage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-md grid-cols-2 gap-2 sm:gap-4">
-            {gallery.map((photo) => (
+          <div className="mx-auto mt-8 grid max-w-lg grid-cols-3 gap-2 sm:gap-4">
+            {gallery.map((photo, i) => (
               <div
-                key={photo.src}
+                key={i}
                 className="overflow-hidden rounded-md border border-ink/10 bg-white/40"
               >
-                <div className="relative aspect-[3/4] bg-lavender">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    quality={90}
-                    sizes="(min-width: 640px) 20vw, 45vw"
-                    className="object-cover object-top"
-                  />
+                <div className="relative flex aspect-[3/4] items-center justify-center bg-lavender">
+                  {photo.src ? (
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      quality={90}
+                      sizes="(min-width: 640px) 15vw, 33vw"
+                      className="object-cover object-top"
+                    />
+                  ) : (
+                    <span className="px-3 text-center text-[11px] text-ink/30">
+                      Photo coming soon
+                    </span>
+                  )}
                 </div>
                 <p className="p-2 text-center text-[11px] leading-snug text-ink/60 sm:p-3 sm:text-xs">
                   Nighty Fabric
