@@ -9,12 +9,4 @@ export const studioPhotos: StudioPhoto[] = [
     caption: "Our Tailoring Studio",
     gradient: "from-lavender via-cream-dark to-cream",
   },
-  {
-    caption: "Fabric Selection",
-    gradient: "from-rose-100 via-cream-dark to-cream",
-  },
-  {
-    caption: "Finished Pieces",
-    gradient: "from-amber-100 via-cream-dark to-cream",
-  },
 ];

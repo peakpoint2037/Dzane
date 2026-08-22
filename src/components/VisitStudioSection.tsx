@@ -16,7 +16,7 @@ export default function VisitStudioSection() {
             Cheriyapallithazham, Kothamangalam
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="mx-auto grid max-w-xs grid-cols-1 gap-2 sm:gap-4">
           {studioPhotos.map((photo) => (
             <div
               key={photo.caption}
