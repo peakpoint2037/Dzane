@@ -84,6 +84,29 @@ export default function NightiesPage() {
             </div>
           </div>
 
+          <div className="mx-auto mt-8 grid max-w-md grid-cols-2 gap-2 sm:gap-4">
+            {gallery.map((photo) => (
+              <div
+                key={photo.src}
+                className="overflow-hidden rounded-md border border-ink/10 bg-white/40"
+              >
+                <div className="relative aspect-[3/4] bg-lavender">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    quality={90}
+                    sizes="(min-width: 640px) 20vw, 45vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+                <p className="p-2 text-center text-[11px] leading-snug text-ink/60 sm:p-3 sm:text-xs">
+                  Nighty Fabric
+                </p>
+              </div>
+            ))}
+          </div>
+
           {stitchingContact && (
             <div className="mt-6 text-center">
               <a
@@ -126,29 +149,6 @@ export default function NightiesPage() {
                 Chat With Our Tailors
               </a>
             )}
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-5xl px-6 py-14">
-          <h2 className="text-center font-serif text-2xl text-ink">
-            Our Nighty Fabric Collection
-          </h2>
-          <div className="mx-auto mt-8 grid max-w-xl grid-cols-1 gap-4 sm:grid-cols-2">
-            {gallery.map((photo) => (
-              <div
-                key={photo.src}
-                className="relative aspect-[4/5] overflow-hidden rounded-md bg-lavender"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  quality={90}
-                  sizes="(min-width: 640px) 40vw, 90vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            ))}
           </div>
         </section>
 
