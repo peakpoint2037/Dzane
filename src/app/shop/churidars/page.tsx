@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Header from "@/components/Header";
+import ProductGrid from "@/components/ProductGrid";
 import { NeedleIcon, ScissorsIcon, TagIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappContacts } from "@/data/contacts";
+import { fetchProducts } from "@/lib/products";
 
 export const metadata = {
   title: "Churidars | DZANE",
@@ -35,7 +37,12 @@ const stitchingContact = whatsappContacts.find(
   (c) => c.role === "Stitching & Tailoring",
 );
 
-export default function ChuridarsPage() {
+export default async function ChuridarsPage() {
+  const { items } = await fetchProducts({
+    category: "churidar-fabric",
+    limit: 24,
+  });
+
   return (
     <>
       <Header />
@@ -137,23 +144,29 @@ export default function ChuridarsPage() {
           <h2 className="text-center font-serif text-2xl text-ink">
             Our Churidar Collection
           </h2>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {gallery.map((photo) => (
-              <div
-                key={photo.src}
-                className="relative aspect-[4/5] overflow-hidden rounded-md bg-lavender"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  quality={90}
-                  sizes="(min-width: 640px) 33vw, 90vw"
-                  className="object-cover object-[75%_center]"
-                />
-              </div>
-            ))}
-          </div>
+          {items.length > 0 ? (
+            <div className="mt-8">
+              <ProductGrid products={items} />
+            </div>
+          ) : (
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {gallery.map((photo) => (
+                <div
+                  key={photo.src}
+                  className="relative aspect-[4/5] overflow-hidden rounded-md bg-lavender"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    quality={90}
+                    sizes="(min-width: 640px) 33vw, 90vw"
+                    className="object-cover object-[75%_center]"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       </main>
     </>

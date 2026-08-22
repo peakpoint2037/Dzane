@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Header from "@/components/Header";
+import ProductGrid from "@/components/ProductGrid";
 import { NeedleIcon, TagIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappContacts } from "@/data/contacts";
+import { fetchProducts } from "@/lib/products";
 
 export const metadata = {
   title: "Sarees | DZANE",
@@ -30,7 +32,9 @@ const ordersContact = whatsappContacts.find(
   (c) => c.role === "Orders, Payments & Support",
 );
 
-export default function SareesPage() {
+export default async function SareesPage() {
+  const { items } = await fetchProducts({ category: "sarees", limit: 24 });
+
   return (
     <>
       <Header />
@@ -132,23 +136,29 @@ export default function SareesPage() {
           <h2 className="text-center font-serif text-2xl text-ink">
             Our Saree Collection
           </h2>
-          <div className="mx-auto mt-8 grid max-w-xs grid-cols-1 gap-4">
-            {gallery.map((photo) => (
-              <div
-                key={photo.src}
-                className="relative aspect-[4/5] overflow-hidden rounded-md bg-lavender"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  quality={90}
-                  sizes="(min-width: 640px) 320px, 90vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            ))}
-          </div>
+          {items.length > 0 ? (
+            <div className="mt-8">
+              <ProductGrid products={items} />
+            </div>
+          ) : (
+            <div className="mx-auto mt-8 grid max-w-xs grid-cols-1 gap-4">
+              {gallery.map((photo) => (
+                <div
+                  key={photo.src}
+                  className="relative aspect-[4/5] overflow-hidden rounded-md bg-lavender"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    quality={90}
+                    sizes="(min-width: 640px) 320px, 90vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       </main>
     </>

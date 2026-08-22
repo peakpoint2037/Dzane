@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Header from "@/components/Header";
+import ProductGrid from "@/components/ProductGrid";
 import { NeedleIcon, ScissorsIcon, TagIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappContacts } from "@/data/contacts";
+import { fetchProducts } from "@/lib/products";
 
 export const metadata = {
   title: "Nighties & Loungewear | DZANE",
@@ -33,7 +35,12 @@ const stitchingContact = whatsappContacts.find(
   (c) => c.role === "Stitching & Tailoring",
 );
 
-export default function NightiesPage() {
+export default async function NightiesPage() {
+  const [fabricProducts, readyMadeProducts] = await Promise.all([
+    fetchProducts({ category: "nighty-fabric", limit: 12 }),
+    fetchProducts({ category: "ready-made-nighty", limit: 12 }),
+  ]);
+
   return (
     <>
       <Header />
@@ -87,34 +94,40 @@ export default function NightiesPage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-lg grid-cols-3 gap-2 sm:gap-4">
-            {gallery.map((photo, i) => (
-              <div
-                key={i}
-                className="overflow-hidden rounded-md border border-ink/10 bg-white/40"
-              >
-                <div className="relative flex aspect-[3/4] items-center justify-center bg-lavender">
-                  {photo.src ? (
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      quality={90}
-                      sizes="(min-width: 640px) 15vw, 33vw"
-                      className="object-cover object-top"
-                    />
-                  ) : (
-                    <span className="px-3 text-center text-[11px] text-ink/30">
-                      Photo coming soon
-                    </span>
-                  )}
+          {fabricProducts.items.length > 0 ? (
+            <div className="mx-auto mt-8 max-w-lg">
+              <ProductGrid products={fabricProducts.items} />
+            </div>
+          ) : (
+            <div className="mx-auto mt-8 grid max-w-lg grid-cols-3 gap-2 sm:gap-4">
+              {gallery.map((photo, i) => (
+                <div
+                  key={i}
+                  className="overflow-hidden rounded-md border border-ink/10 bg-white/40"
+                >
+                  <div className="relative flex aspect-[3/4] items-center justify-center bg-lavender">
+                    {photo.src ? (
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        quality={90}
+                        sizes="(min-width: 640px) 15vw, 33vw"
+                        className="object-cover object-top"
+                      />
+                    ) : (
+                      <span className="px-3 text-center text-[11px] text-ink/30">
+                        Photo coming soon
+                      </span>
+                    )}
+                  </div>
+                  <p className="p-2 text-center text-[11px] leading-snug text-ink/60 sm:p-3 sm:text-xs">
+                    Nighty Fabric
+                  </p>
                 </div>
-                <p className="p-2 text-center text-[11px] leading-snug text-ink/60 sm:p-3 sm:text-xs">
-                  Nighty Fabric
-                </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {stitchingContact && (
             <div className="mt-6 text-center">
@@ -172,25 +185,31 @@ export default function NightiesPage() {
               wait.
             </p>
 
-            <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4">
-              {readyMadeGallery.map((photo, i) => (
-                <div
-                  key={i}
-                  className="overflow-hidden rounded-md border border-ink/10 bg-white/40"
-                >
+            {readyMadeProducts.items.length > 0 ? (
+              <div className="mt-8">
+                <ProductGrid products={readyMadeProducts.items} />
+              </div>
+            ) : (
+              <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4">
+                {readyMadeGallery.map((photo, i) => (
                   <div
-                    className={`relative flex aspect-[3/4] items-center justify-center bg-gradient-to-br ${photo.gradient}`}
+                    key={i}
+                    className="overflow-hidden rounded-md border border-ink/10 bg-white/40"
                   >
-                    <span className="px-3 text-center text-[11px] text-ink/30">
-                      Photo coming soon
-                    </span>
+                    <div
+                      className={`relative flex aspect-[3/4] items-center justify-center bg-gradient-to-br ${photo.gradient}`}
+                    >
+                      <span className="px-3 text-center text-[11px] text-ink/30">
+                        Photo coming soon
+                      </span>
+                    </div>
+                    <p className="p-2 text-center text-[11px] leading-snug text-ink/60 sm:p-3 sm:text-xs">
+                      {photo.caption}
+                    </p>
                   </div>
-                  <p className="p-2 text-center text-[11px] leading-snug text-ink/60 sm:p-3 sm:text-xs">
-                    {photo.caption}
-                  </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             {stitchingContact && (
               <div className="mt-8 text-center">
