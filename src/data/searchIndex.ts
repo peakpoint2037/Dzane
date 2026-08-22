@@ -32,21 +32,33 @@ export const searchIndex: SearchEntry[] = [
   },
   {
     title: "Women's Jewellery",
-    href: "/#family-wear",
+    href: "/shop/jewellery",
     description: "Earrings, bangles & necklace sets.",
     keywords: ["jewellery", "jewelry", "earrings", "bangles", "necklace"],
   },
   {
     title: "Kids Wear",
-    href: "/#family-wear",
+    href: "/shop/kids",
     description: "Comfy, playful & festive picks for kids.",
     keywords: ["kids", "children", "kids wear", "festive"],
   },
   {
     title: "Men's Wear",
-    href: "/#family-wear",
+    href: "/shop/mens",
     description: "Shirts, kurtas & ethnic sets.",
     keywords: ["men", "mens", "men's wear", "shirts", "kurtas"],
+  },
+  {
+    title: "Custom Stitching",
+    href: "/custom-stitching",
+    description: "How our fabric + stitching process works, start to finish.",
+    keywords: ["custom stitching", "stitching", "tailoring", "measurements", "bring your own fabric"],
+  },
+  {
+    title: "New Arrivals",
+    href: "/shop/new-arrivals",
+    description: "Our latest pieces.",
+    keywords: ["new arrivals", "new", "latest"],
   },
   {
     title: "About Us",
