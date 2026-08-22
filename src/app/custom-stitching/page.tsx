@@ -37,6 +37,13 @@ const steps = [
   },
 ];
 
+const stitchingPrices = [
+  { item: "Churidar", price: "₹500 onwards" },
+  { item: "Normal Blouse", price: "₹350" },
+  { item: "Lining Blouse", price: "₹550 onwards" },
+  { item: "Nighty", price: "₹100" },
+];
+
 const stitchedCategories = [
   {
     title: "Churidars",
@@ -124,6 +131,51 @@ export default function CustomStitchingPage() {
         </section>
 
         <section className="border-t border-ink/10 bg-lavender/30 py-14">
+          <div className="mx-auto max-w-5xl px-6">
+            <div className="flex items-center justify-center gap-2">
+              <TagIcon className="h-5 w-5 text-gold" />
+              <h2 className="font-serif text-2xl text-ink">
+                Stitching Charges
+              </h2>
+            </div>
+            <p className="mx-auto mt-2 max-w-md text-center text-sm text-ink/60">
+              Stitching only &mdash; fabric is priced separately. Message us
+              for an exact quote.
+            </p>
+
+            <div className="mx-auto mt-8 grid max-w-2xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {stitchingPrices.map((item) => (
+                <div
+                  key={item.item}
+                  className="rounded-md border border-ink/10 bg-white p-5 text-center"
+                >
+                  <p className="font-serif text-lg text-ink">{item.item}</p>
+                  <p className="mt-1 font-serif text-xl text-gold">
+                    {item.price}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {stitchingContact && (
+              <div className="mt-6 text-center">
+                <a
+                  href={`https://wa.me/${stitchingContact.phone}?text=${encodeURIComponent(
+                    "Hi DZANE! I'd like more details on stitching charges."
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-sm bg-olive px-8 py-3 text-xs font-semibold uppercase tracking-widest text-cream transition-colors hover:bg-olive-light"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Ask Our Stitching &amp; Tailoring Team
+                </a>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="border-t border-ink/10 bg-cream py-14">
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex items-center justify-center gap-2">
               <NeedleIcon className="h-5 w-5 text-gold" />
