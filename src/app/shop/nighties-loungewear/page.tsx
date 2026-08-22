@@ -23,8 +23,8 @@ const gallery = [
 const variants = [
   {
     name: "Regular",
-    fabric: "₹240",
-    stitched: "₹340",
+    fabric: "₹250",
+    stitched: "₹350",
     note: "Everyday soft cotton nighties",
   },
   {
