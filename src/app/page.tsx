@@ -4,8 +4,10 @@ import HowWeWorkSection from "@/components/HowWeWorkSection";
 import OffersSection from "@/components/OffersSection";
 import CategorySection from "@/components/CategorySection";
 import FamilyWearSection from "@/components/FamilyWearSection";
+import VisitStudioSection from "@/components/VisitStudioSection";
 import TrustBar from "@/components/TrustBar";
 import ReviewsSection from "@/components/ReviewsSection";
+import HappyCustomersSection from "@/components/HappyCustomersSection";
 
 export default function Home() {
   return (
@@ -16,9 +18,11 @@ export default function Home() {
         <HowWeWorkSection />
         <CategorySection />
         <FamilyWearSection />
+        <VisitStudioSection />
         <TrustBar />
         <OffersSection />
         <ReviewsSection />
+        <HappyCustomersSection />
       </main>
     </>
   );
