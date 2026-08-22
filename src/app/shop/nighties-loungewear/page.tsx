@@ -6,7 +6,7 @@ import { whatsappContacts } from "@/data/contacts";
 export const metadata = {
   title: "Nighties & Loungewear | DZANE",
   description:
-    "Shop nighty fabric in Regular or Premium, stitched to your size, or bring your own fabric to us.",
+    "Shop nighty fabric stitched to your size, or ready-made nighties by Nakshatra.",
 };
 
 const gallery = [
@@ -20,19 +20,10 @@ const gallery = [
   },
 ];
 
-const variants = [
-  {
-    name: "Regular",
-    fabric: "₹250",
-    stitched: "₹350",
-    note: "Everyday soft cotton nighties",
-  },
-  {
-    name: "Premium",
-    fabric: "₹300",
-    stitched: "₹400",
-    note: "Finer prints & softer fabric",
-  },
+const readyMadeGallery = [
+  { caption: "Nakshatra Nighties", gradient: "from-rose-100 via-cream-dark to-cream" },
+  { caption: "Nakshatra Nighties", gradient: "from-amber-100 via-cream-dark to-cream" },
+  { caption: "Nakshatra Nighties", gradient: "from-lavender via-cream-dark to-cream" },
 ];
 
 const stitchingContact = whatsappContacts.find(
@@ -60,52 +51,44 @@ export default function NightiesPage() {
                 Nighties &amp; Loungewear
               </h1>
               <p className="mt-2 max-w-sm text-sm text-ink/70 sm:text-base">
-                Choose Regular or Premium fabric and we&apos;ll stitch it to
-                your size, or bring your own fabric to us.
+                Fabric stitched to your size, or ready-made nighties by
+                Nakshatra.
               </p>
             </div>
           </div>
         </section>
 
+        {/* ---- Nighty Fabrics ---- */}
         <section className="mx-auto max-w-5xl px-6 py-14">
           <div className="flex items-center justify-center gap-2">
             <TagIcon className="h-5 w-5 text-gold" />
-            <h2 className="font-serif text-2xl text-ink">
-              Nighty Fabric &amp; Stitching Prices
-            </h2>
+            <h2 className="font-serif text-2xl text-ink">Nighty Fabrics</h2>
           </div>
           <p className="mx-auto mt-2 max-w-md text-center text-sm text-ink/60">
-            Prices include stitching. Pick your fabric type below.
+            One flat rate on all nighty fabric.
           </p>
 
-          <div className="mx-auto mt-8 grid max-w-2xl gap-4 sm:grid-cols-2">
-            {variants.map((variant) => (
-              <div
-                key={variant.name}
-                className="rounded-md border border-ink/10 bg-white p-6 text-center"
-              >
-                <p className="font-serif text-xl text-ink">{variant.name}</p>
-                <p className="mt-1 text-xs text-ink/60">{variant.note}</p>
-                <div className="mt-4 flex items-baseline justify-center gap-2">
-                  <span className="text-sm text-ink/40 line-through">
-                    {variant.fabric}
-                  </span>
-                  <span className="font-serif text-2xl text-gold">
-                    {variant.stitched}
-                  </span>
-                </div>
-                <p className="mt-1 text-[11px] uppercase tracking-wide text-ink/40">
-                  Fabric only &rarr; With stitching
-                </p>
+          <div className="mx-auto mt-8 max-w-xs">
+            <div className="rounded-md border border-ink/10 bg-white p-6 text-center">
+              <p className="font-serif text-xl text-ink">Nighty Fabric</p>
+              <p className="mt-1 text-xs text-ink/60">
+                Soft cotton, stitched to your size
+              </p>
+              <div className="mt-4 flex items-baseline justify-center gap-2">
+                <span className="text-sm text-ink/40 line-through">₹250</span>
+                <span className="font-serif text-2xl text-gold">₹350</span>
               </div>
-            ))}
+              <p className="mt-1 text-[11px] uppercase tracking-wide text-ink/40">
+                Fabric only &rarr; With stitching
+              </p>
+            </div>
           </div>
 
           {stitchingContact && (
             <div className="mt-6 text-center">
               <a
                 href={`https://wa.me/${stitchingContact.phone}?text=${encodeURIComponent(
-                  "Hi DZANE! I'd like to order a nighty — please share fabric options.",
+                  "Hi DZANE! I'd like to order a nighty fabric with stitching.",
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -148,7 +131,7 @@ export default function NightiesPage() {
 
         <section className="mx-auto max-w-5xl px-6 py-14">
           <h2 className="text-center font-serif text-2xl text-ink">
-            Our Nightwear Collection
+            Our Nighty Fabric Collection
           </h2>
           <div className="mx-auto mt-8 grid max-w-xl grid-cols-1 gap-4 sm:grid-cols-2">
             {gallery.map((photo) => (
@@ -166,6 +149,55 @@ export default function NightiesPage() {
                 />
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ---- Ready Made Nighties (Nakshatra) ---- */}
+        <section className="border-t border-ink/10 bg-lavender/20 py-14">
+          <div className="mx-auto max-w-5xl px-6">
+            <h2 className="text-center font-serif text-2xl text-ink">
+              Ready Made Nighties
+            </h2>
+            <p className="mx-auto mt-2 max-w-md text-center text-sm text-ink/60">
+              Finished nighties by Nakshatra, ready to wear — no stitching
+              wait.
+            </p>
+
+            <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4">
+              {readyMadeGallery.map((photo, i) => (
+                <div
+                  key={i}
+                  className="overflow-hidden rounded-md border border-ink/10 bg-white/40"
+                >
+                  <div
+                    className={`relative flex aspect-[3/4] items-center justify-center bg-gradient-to-br ${photo.gradient}`}
+                  >
+                    <span className="px-3 text-center text-[11px] text-ink/30">
+                      Photo coming soon
+                    </span>
+                  </div>
+                  <p className="p-2 text-center text-[11px] leading-snug text-ink/60 sm:p-3 sm:text-xs">
+                    {photo.caption}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {stitchingContact && (
+              <div className="mt-8 text-center">
+                <a
+                  href={`https://wa.me/${stitchingContact.phone}?text=${encodeURIComponent(
+                    "Hi DZANE! I'd like to know more about your ready made Nakshatra nighties.",
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-sm bg-olive px-8 py-3 text-xs font-semibold uppercase tracking-widest text-cream transition-colors hover:bg-olive-light"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Ask About Ready Made Nighties
+                </a>
+              </div>
+            )}
           </div>
         </section>
       </main>
