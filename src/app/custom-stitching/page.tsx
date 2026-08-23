@@ -39,9 +39,9 @@ const steps = [
 
 const stitchingPrices = [
   { item: "Churidar", price: "₹500 onwards" },
-  { item: "Normal Blouse", price: "₹350" },
+  { item: "Normal Blouse", price: "₹350 onwards" },
   { item: "Lining Blouse", price: "₹550 onwards" },
-  { item: "Nighty", price: "₹100" },
+  { item: "Nighty", price: "₹100 onwards" },
 ];
 
 const stitchedCategories = [
