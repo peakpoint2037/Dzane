@@ -17,13 +17,13 @@ function ReviewCard({ review }: { review: Review }) {
     <div className="flex w-80 shrink-0 flex-col gap-3 rounded-md border border-ink/10 bg-white p-5 shadow-sm">
       <div className="flex items-center gap-3">
         {review.photo ? (
-          <span className="relative h-[120px] w-[120px] shrink-0 overflow-hidden rounded-md bg-lavender">
+          <span className="relative h-[150px] w-[150px] shrink-0 overflow-hidden rounded-md bg-lavender">
             <Image
               src={review.photo}
               alt={`${review.name} wearing DZANE`}
               fill
               quality={90}
-              sizes="120px"
+              sizes="150px"
               className="object-cover"
             />
           </span>
