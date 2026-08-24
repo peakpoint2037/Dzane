@@ -15,6 +15,7 @@ export const reviews: Review[] = [
     product: "Custom Stitched Churidar",
     comment:
       "Got my churidar custom stitched here and the fit was perfect on the first try. Loved the finishing on the dupatta.",
+    photo: "/images/review-anju-sivan.jpg",
   },
   {
     name: "Ruia Prasanth",
