@@ -16,7 +16,7 @@ function ReviewCard({ review }: { review: Review }) {
   return (
     <div className="flex w-80 shrink-0 flex-col gap-3 overflow-hidden rounded-md border border-ink/10 bg-white shadow-sm">
       {review.photo && (
-        <div className="relative aspect-square w-full bg-lavender">
+        <div className="relative aspect-[4/3] w-full bg-lavender sm:aspect-square">
           <Image
             src={review.photo}
             alt={`${review.name} wearing DZANE`}
