@@ -23,7 +23,7 @@ function ReviewCard({ review }: { review: Review }) {
             fill
             quality={90}
             sizes="320px"
-            className="object-cover"
+            className="object-cover object-top"
           />
         </div>
       )}
