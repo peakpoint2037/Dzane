@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Jost } from "next/font/google";
 import "./globals.css";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import Footer from "@/components/Footer";
 
 const heading = Playfair_Display({
   variable: "--font-heading",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
         {children}
+        <Footer />
         <WhatsAppWidget />
       </body>
     </html>
