@@ -50,6 +50,7 @@ export const reviews: Review[] = [
     product: "Custom Stitched Churidar",
     comment:
       "Got my churidar custom stitched and the fit is perfect, premium fabric, and the packaging was so pretty. DZANE never disappoints.",
+    photo: "/images/review-anette-jose.jpg",
   },
   {
     name: "Neethu Sunny",
