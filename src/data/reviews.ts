@@ -23,6 +23,7 @@ export const reviews: Review[] = [
     product: "Custom Stitched Dress",
     comment:
       "Came in for custom dress stitching for a family function. The tailoring team nailed the fit and the detailing was beautiful.",
+    photo: "/images/review-ruia-prasanth.jpg",
   },
   {
     name: "Priya Rachel",
