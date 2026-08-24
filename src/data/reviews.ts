@@ -57,4 +57,12 @@ export const reviews: Review[] = [
     comment:
       "Purchased a churidar and a couple of other ladies wear pieces. Customer support helped me pick the right size and the quality is excellent.",
   },
+  {
+    name: "Gladly Eldho",
+    location: "Kothamangalam",
+    rating: 5,
+    product: "Custom Stitched Churidar",
+    comment:
+      "Got my churidar stitched here and couldn't be happier with the fit. Neat finishing and they were so patient with my measurements.",
+  },
 ];
