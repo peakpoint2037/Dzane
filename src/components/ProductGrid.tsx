@@ -53,11 +53,18 @@ function ProductCard({ product }: { product: PublicProduct }) {
 
 export default function ProductGrid({
   products,
+  dense = false,
 }: {
   products: PublicProduct[];
+  /** Show more columns on larger screens (up to 5 per row). */
+  dense?: boolean;
 }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+    <div
+      className={`grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 ${
+        dense ? "lg:grid-cols-5" : ""
+      }`}
+    >
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

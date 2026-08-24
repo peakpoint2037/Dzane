@@ -95,8 +95,8 @@ export default async function NightiesPage() {
           </div>
 
           {fabricProducts.items.length > 0 ? (
-            <div className="mx-auto mt-8 max-w-lg">
-              <ProductGrid products={fabricProducts.items} />
+            <div className="mt-8">
+              <ProductGrid products={fabricProducts.items} dense />
             </div>
           ) : (
             <div className="mx-auto mt-8 grid max-w-lg grid-cols-3 gap-2 sm:gap-4">
