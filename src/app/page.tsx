@@ -7,7 +7,6 @@ import FamilyWearSection from "@/components/FamilyWearSection";
 import VisitStudioSection from "@/components/VisitStudioSection";
 import TrustBar from "@/components/TrustBar";
 import ReviewsSection from "@/components/ReviewsSection";
-import HappyCustomersSection from "@/components/HappyCustomersSection";
 
 export default function Home() {
   return (
@@ -22,7 +21,6 @@ export default function Home() {
         <TrustBar />
         <OffersSection />
         <ReviewsSection />
-        <HappyCustomersSection />
       </main>
     </>
   );
