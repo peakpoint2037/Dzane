@@ -63,6 +63,6 @@ export const reviews: Review[] = [
     rating: 5,
     product: "Custom Stitched Churidar",
     comment:
-      "Got my churidar stitched here and couldn't be happier with the fit. Neat finishing and they were so patient with my measurements.",
+      "Bought the fabric from DZANE and got my churidar stitched here — couldn't be happier with the fit. Neat finishing and they were so patient with my measurements.",
   },
 ];
