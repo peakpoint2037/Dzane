@@ -39,6 +39,7 @@ export const reviews: Review[] = [
     product: "Ladies Wear Set",
     comment:
       "Ordered a few ladies wear pieces from DZANE and the fabric quality is amazing. Will be ordering again.",
+    photo: "/images/review-jilna-james.jpg",
   },
   {
     name: "Anette Jose",
