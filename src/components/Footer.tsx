@@ -10,8 +10,8 @@ export default function Footer() {
     <footer className="border-t border-ink/10 bg-olive py-4 text-cream/80">
       <div className="mx-auto max-w-7xl px-6 text-center text-[11px] leading-relaxed">
         <p>
-          Model images on this website are AI-generated for illustration
-          purposes only.{" "}
+          Some product category images on this website are AI-generated for
+          illustration purposes only.{" "}
           <a
             href={waHref}
             target="_blank"
