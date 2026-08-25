@@ -40,7 +40,7 @@ const stitchingContact = whatsappContacts.find(
 export default async function ChuridarsPage() {
   const { items } = await fetchProducts({
     category: "churidar-fabric",
-    limit: 24,
+    limit: 100,
   });
 
   return (

@@ -33,7 +33,7 @@ const ordersContact = whatsappContacts.find(
 );
 
 export default async function SareesPage() {
-  const { items } = await fetchProducts({ category: "sarees", limit: 24 });
+  const { items } = await fetchProducts({ category: "sarees", limit: 100 });
 
   return (
     <>

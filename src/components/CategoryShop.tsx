@@ -23,7 +23,7 @@ export default async function CategoryShop({
     category: categorySlug,
     sortBy: "createdAt",
     sortDir: "desc",
-    limit: 24,
+    limit: 100,
   });
 
   if (items.length === 0) {

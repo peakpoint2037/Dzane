@@ -37,8 +37,8 @@ const stitchingContact = whatsappContacts.find(
 
 export default async function NightiesPage() {
   const [fabricProducts, readyMadeProducts] = await Promise.all([
-    fetchProducts({ category: "nighty-fabric", limit: 12 }),
-    fetchProducts({ category: "ready-made-nighty", limit: 12 }),
+    fetchProducts({ category: "nighty-fabric", limit: 100 }),
+    fetchProducts({ category: "ready-made-nighty", limit: 100 }),
   ]);
 
   return (

@@ -36,7 +36,7 @@ const ordersContact = whatsappContacts.find(
 export default async function ReadymadeWearPage() {
   const { items } = await fetchProducts({
     category: "readymade-wear",
-    limit: 24,
+    limit: 100,
   });
 
   return (
