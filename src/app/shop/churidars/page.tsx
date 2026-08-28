@@ -6,7 +6,7 @@ import { whatsappContacts } from "@/data/contacts";
 import { fetchProducts } from "@/lib/products";
 
 export const metadata = {
-  title: "Churidars | DZANE",
+  title: "Churidar Fabrics | DZANE",
   description:
     "Shop churidar fabric by price tier and get it stitched to your size, or bring your own fabric to us.",
 };
@@ -60,7 +60,7 @@ export default async function ChuridarsPage() {
           <div className="absolute inset-0 flex items-center bg-gradient-to-r from-cream/90 via-cream/40 to-transparent">
             <div className="mx-auto w-full max-w-7xl px-6">
               <h1 className="max-w-md font-serif text-3xl text-ink sm:text-4xl">
-                Churidars
+                Churidar Fabrics
               </h1>
               <p className="mt-2 max-w-sm text-sm text-ink/70 sm:text-base">
                 Pick a fabric by price tier and we&apos;ll stitch it to your
@@ -142,7 +142,7 @@ export default async function ChuridarsPage() {
 
         <section className="mx-auto max-w-5xl px-6 py-14">
           <h2 className="text-center font-serif text-2xl text-ink">
-            Our Churidar Collection
+            Our Churidar Fabric Collection
           </h2>
           {items.length > 0 ? (
             <div className="mt-8">
