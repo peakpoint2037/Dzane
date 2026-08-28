@@ -21,7 +21,7 @@ const steps = [
     icon: TagIcon,
     title: "Pick a Fabric or Bring Your Own",
     description:
-      "Choose fabric by price tier for Churidars & Nighties, or bring your own fabric — we'll stitch either.",
+      "Choose fabric by price tier for Churidar Fabrics & Nighty Fabrics, or bring your own fabric — we'll stitch either.",
   },
   {
     icon: ShieldIcon,
@@ -46,7 +46,7 @@ const stitchingPrices = [
 
 const stitchedCategories = [
   {
-    title: "Churidars",
+    title: "Churidar Fabrics",
     href: "/shop/churidars",
     description: "Fabric by price tier, stitched to your size.",
   },

@@ -25,7 +25,7 @@ export const categories: Category[] = [
     imageScale: 1.12,
   },
   {
-    title: "Churidars",
+    title: "Churidar Fabrics",
     href: "/shop/churidars",
     cta: "Shop Now",
     gradient: "from-emerald-200/60 via-cream-dark to-cream",

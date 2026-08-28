@@ -7,10 +7,10 @@ export type SearchEntry = {
 
 export const searchIndex: SearchEntry[] = [
   {
-    title: "Churidars",
+    title: "Churidar Fabrics",
     href: "/shop/churidars",
     description: "Pick a fabric by price tier and we stitch it to your size.",
-    keywords: ["churidar", "churidars", "salwar", "kameez", "stitching"],
+    keywords: ["churidar", "churidars", "churidar fabrics", "salwar", "kameez", "stitching"],
   },
   {
     title: "Nighties & Loungewear",

@@ -5,7 +5,7 @@ export type NavLink = {
 
 export const navLinks: NavLink[] = [
   { label: "Nighties & Loungewear", href: "/shop/nighties-loungewear" },
-  { label: "Churidars", href: "/shop/churidars" },
+  { label: "Churidar Fabrics", href: "/shop/churidars" },
   { label: "Readymade Wear", href: "/shop/readymade-wear" },
   { label: "Sarees", href: "/shop/sarees" },
   { label: "Custom Stitching", href: "/custom-stitching" },

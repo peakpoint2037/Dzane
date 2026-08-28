@@ -50,7 +50,7 @@ export default async function ChuridarsPage() {
         <section className="relative aspect-[16/7] w-full overflow-hidden bg-lavender">
           <Image
             src="/images/hero-banner-yellow.png"
-            alt="Churidars from DZANE"
+            alt="Churidar Fabrics from DZANE"
             fill
             priority
             quality={90}

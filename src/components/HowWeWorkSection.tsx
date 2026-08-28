@@ -11,7 +11,7 @@ const ways = [
     icon: ScissorsIcon,
     title: "Choose Our Fabric + Stitching",
     description:
-      "Churidars & Nighties — pick a fabric by price tier and we stitch it to your size. Sarees come ready-made, with the blouse stitched to match.",
+      "Churidar Fabrics & Nighty Fabrics — pick a fabric by price tier and we stitch it to your size. Sarees come ready-made, with the blouse stitched to match.",
   },
   {
     icon: NeedleIcon,

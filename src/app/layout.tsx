@@ -17,7 +17,7 @@ const body = Jost({
 export const metadata: Metadata = {
   title: "DZANE | Stitching Studio",
   description:
-    "Nighties, Loungewear, Churidars, Dresses & Sarees — beautifully stitched with care. Custom fits, personal touches, made for you.",
+    "Nighties, Loungewear, Churidar Fabrics, Dresses & Sarees — beautifully stitched with care. Custom fits, personal touches, made for you.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
