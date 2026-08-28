@@ -144,6 +144,22 @@ export default async function ChuridarsPage() {
           <h2 className="text-center font-serif text-2xl text-ink">
             Our Churidar Fabric Collection
           </h2>
+          <p className="mx-auto mt-2 max-w-md text-center text-xs text-ink/50">
+            Model photos may not show the exact fabric print/colour.{" "}
+            {stitchingContact && (
+              <a
+                href={`https://wa.me/${stitchingContact.phone}?text=${encodeURIComponent(
+                  "Hi DZANE! Can you show me the complete fabric before I order?",
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-gold underline underline-offset-2 hover:text-gold-dark"
+              >
+                Chat with us
+              </a>
+            )}{" "}
+            to see the complete fabric before you order.
+          </p>
           {items.length > 0 ? (
             <div className="mt-8">
               <ProductGrid products={items} />
