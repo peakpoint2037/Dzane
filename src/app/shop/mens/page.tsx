@@ -1,5 +1,9 @@
 import CategoryShop from "@/components/CategoryShop";
 
+// Backend can cold-start slowly on Render's free tier — give it room
+// to wake up before Vercel kills the request.
+export const maxDuration = 30;
+
 export const metadata = {
   title: "Men's Wear | DZANE",
   description: "Shirts, kurtas & ethnic sets from DZANE.",

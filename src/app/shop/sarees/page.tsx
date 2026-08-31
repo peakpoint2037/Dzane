@@ -5,6 +5,10 @@ import { NeedleIcon, TagIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappContacts } from "@/data/contacts";
 import { fetchProducts } from "@/lib/products";
 
+// Backend can cold-start slowly on Render's free tier — give it room
+// to wake up before Vercel kills the request.
+export const maxDuration = 30;
+
 export const metadata = {
   title: "Sarees | DZANE",
   description:

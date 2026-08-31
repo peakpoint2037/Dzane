@@ -72,7 +72,7 @@ export async function fetchProducts(
     const res = await fetch(
       `${API_BASE}/api/public/products?${params.toString()}`,
       {
-        signal: AbortSignal.timeout(15000),
+        signal: AbortSignal.timeout(28000),
         next: { revalidate: 60 },
       }
     );
@@ -92,7 +92,7 @@ export async function fetchProduct(
 ): Promise<PublicProductDetail | null> {
   try {
     const res = await fetch(`${API_BASE}/api/public/products/${id}`, {
-      signal: AbortSignal.timeout(15000),
+      signal: AbortSignal.timeout(28000),
       next: { revalidate: 60 },
     });
     if (!res.ok) return null;
