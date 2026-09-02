@@ -12,7 +12,7 @@ export default function Logo({ compact = false }: { compact?: boolean }) {
         alt="DZANE"
         width={1000}
         height={1000}
-        className={compact ? "h-12 w-auto sm:h-20 lg:h-28" : "h-48 w-auto sm:h-56"}
+        className={compact ? "h-16 w-auto sm:h-20 lg:h-28" : "h-48 w-auto sm:h-56"}
       />
       {!compact && (
         <span className="mt-1 text-[10px] tracking-[0.35em] text-ink/60">
