@@ -59,7 +59,12 @@ function ReviewCard({ review }: { review: Review }) {
 }
 
 export default function ReviewsSection() {
-  const track = [...reviews, ...reviews];
+  const sorted = [...reviews].sort((a, b) => {
+    if (a.photo && !b.photo) return -1;
+    if (!a.photo && b.photo) return 1;
+    return 0;
+  });
+  const track = [...sorted, ...sorted];
 
   return (
     <section
