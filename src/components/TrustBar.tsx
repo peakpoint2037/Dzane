@@ -41,14 +41,14 @@ export default function TrustBar() {
         ))}
 
         <a
-          href="/images/gpay-qr-v2.jpg"
+          href="/images/gpay-qr-v3.jpg"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-3"
         >
           <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-sm border border-gold/40">
             <Image
-              src="/images/gpay-qr-v2.jpg"
+              src="/images/gpay-qr-v3.jpg"
               alt="Scan to pay DZANE via Google Pay / UPI"
               fill
               quality={90}
@@ -61,7 +61,7 @@ export default function TrustBar() {
               Pay via GPay / UPI
             </p>
             <p className="text-[11px] text-ink/60">
-              ajaibalan333@okicici &middot; tap to view
+              dzanestitchingstudio@okicici &middot; tap to view
             </p>
           </div>
         </a>
