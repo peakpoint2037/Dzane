@@ -58,7 +58,7 @@ export default function Header() {
             {menuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
           </button>
           <Logo compact />
-          <span className="text-shimmer hidden self-start pt-1 text-[11px] font-semibold uppercase tracking-[0.15em] sm:block">
+          <span className="text-shimmer self-start pt-1 text-[7px] font-semibold uppercase leading-tight tracking-[0.04em] sm:text-[11px] sm:tracking-[0.15em]">
             Stitching Studio
             <br />
             and Premium Ladies Wear
