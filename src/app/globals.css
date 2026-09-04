@@ -5,16 +5,16 @@
   --foreground: #33272a;
 
   --color-cream: #ffffff;
-  --color-cream-dark: #fbe8e0;
-  --color-lavender: #fbe8e0;
-  --color-lavender-dark: #f2cebd;
-  --color-olive: #e2895f;
-  --color-olive-light: #eda67f;
+  --color-cream-dark: #fcebe6;
+  --color-lavender: #fcebe6;
+  --color-lavender-dark: #f5d0c7;
+  --color-olive: #eda98f;
+  --color-olive-light: #f5c4ae;
   --color-ink: #33272a;
-  --color-gold: #d9714e;
-  --color-gold-light: #e2895f;
-  --color-gold-dark: #b85a3a;
-  --color-plum: #e2895f;
+  --color-gold: #dd7a6a;
+  --color-gold-light: #e89584;
+  --color-gold-dark: #c05f52;
+  --color-plum: #eda98f;
 }
 
 @theme inline {
