@@ -39,7 +39,7 @@ export default function Header() {
               MADE WITH LOVE
             </span>
           </div>
-          <span className="flex items-center gap-1.5 text-gold-light">
+          <span className="flex items-center gap-1.5 text-cream">
             Free Shipping on Orders Above ₹999
             <TruckIcon className="h-3.5 w-3.5" />
           </span>
