@@ -61,6 +61,15 @@ export const reviews: Review[] = [
       "Purchased a churidar and a couple of other ladies wear pieces. Customer support helped me pick the right size and the quality is excellent.",
   },
   {
+    name: "Kavitha Nair",
+    location: "Kottayam",
+    rating: 5,
+    product: "Custom Stitched Churidar",
+    comment:
+      "Picked a beautiful churidar fabric from DZANE and got it stitched — the fit and finishing were just perfect. Truly happy with how it turned out.",
+    photo: "/images/review-kavitha-nair.jpg",
+  },
+  {
     name: "Gladly Eldho",
     location: "Kothamangalam",
     rating: 5,
