@@ -15,8 +15,20 @@ export const searchIndex: SearchEntry[] = [
   {
     title: "Nighties & Loungewear",
     href: "/shop/nighties-loungewear",
-    description: "Fabric by price tier, stitched to your size.",
+    description: "Nighty fabrics, or ready-made nighties by Nakshatra.",
     keywords: ["nighty", "nighties", "loungewear", "nightwear", "sleepwear"],
+  },
+  {
+    title: "Nighty Fabrics",
+    href: "/shop/nighties-loungewear/fabrics",
+    description: "One flat rate on all nighty fabric, stitched to your size.",
+    keywords: ["nighty fabric", "nighty fabrics", "nightwear fabric"],
+  },
+  {
+    title: "Ready Made Nighties",
+    href: "/shop/nighties-loungewear/ready-made",
+    description: "Finished nighties by Nakshatra, ready to wear.",
+    keywords: ["ready made nighty", "nakshatra", "ready made nighties"],
   },
   {
     title: "Sarees",
@@ -100,12 +112,6 @@ export const searchIndex: SearchEntry[] = [
     href: "/#customer-reviews",
     description: "Real reviews from women who've worn DZANE.",
     keywords: ["reviews", "testimonials", "feedback", "ratings"],
-  },
-  {
-    title: "Happy Customers",
-    href: "/#happy-customers",
-    description: "Real women, real DZANE pieces.",
-    keywords: ["customers", "photos", "gallery", "happy customers"],
   },
   {
     title: "How We Work",
