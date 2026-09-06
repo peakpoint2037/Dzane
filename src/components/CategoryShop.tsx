@@ -1,5 +1,5 @@
 import Header from "./Header";
-import ProductGrid from "./ProductGrid";
+import ProductBrowser from "./ProductBrowser";
 import ComingSoon from "./ComingSoon";
 import { fetchProducts } from "@/lib/products";
 
@@ -42,7 +42,7 @@ export default async function CategoryShop({
             {subtitle}
           </p>
           <div className="mt-8">
-            <ProductGrid products={items} />
+            <ProductBrowser products={items} />
           </div>
         </section>
       </main>

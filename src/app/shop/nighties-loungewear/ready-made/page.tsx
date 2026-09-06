@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
-import ProductGrid from "@/components/ProductGrid";
+import ProductBrowser from "@/components/ProductBrowser";
 import { WhatsAppIcon } from "@/components/icons";
 import { whatsappContacts } from "@/data/contacts";
 import { fetchProducts } from "@/lib/products";
@@ -55,7 +55,7 @@ export default async function ReadyMadeNightiesPage() {
 
             {items.length > 0 ? (
               <div className="mt-8">
-                <ProductGrid products={items} dense />
+                <ProductBrowser products={items} dense />
               </div>
             ) : (
               <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4">

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Header from "@/components/Header";
-import ProductGrid from "@/components/ProductGrid";
+import ProductBrowser from "@/components/ProductBrowser";
 import { NeedleIcon, TagIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappContacts } from "@/data/contacts";
 import { fetchProducts } from "@/lib/products";
@@ -142,7 +142,7 @@ export default async function SareesPage() {
           </h2>
           {items.length > 0 ? (
             <div className="mt-8">
-              <ProductGrid products={items} />
+              <ProductBrowser products={items} />
             </div>
           ) : (
             <div className="mx-auto mt-8 grid max-w-xs grid-cols-1 gap-4">

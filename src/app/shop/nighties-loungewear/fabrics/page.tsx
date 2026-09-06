@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
-import ProductGrid from "@/components/ProductGrid";
+import ProductBrowser from "@/components/ProductBrowser";
 import { NeedleIcon, ScissorsIcon, TagIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappContacts } from "@/data/contacts";
 import { fetchProducts } from "@/lib/products";
@@ -81,7 +81,7 @@ export default async function NightyFabricsPage() {
 
           {items.length > 0 ? (
             <div className="mt-8">
-              <ProductGrid products={items} dense />
+              <ProductBrowser products={items} dense />
             </div>
           ) : (
             <div className="mx-auto mt-8 grid max-w-lg grid-cols-3 gap-2 sm:gap-4">
