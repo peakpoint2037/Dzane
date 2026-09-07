@@ -4,6 +4,28 @@ import { useMemo, useState } from "react";
 import ProductGrid from "./ProductGrid";
 import type { PublicProduct } from "@/lib/products";
 
+type PriceBand = { min: number; max: number; label: string };
+
+function computePriceBands(products: PublicProduct[]): PriceBand[] {
+  const prices = products.map((p) => p.sellingPrice).filter((p) => p > 0);
+  if (prices.length === 0) return [];
+
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  if (min === max) return [{ min, max, label: `₹${min}` }];
+
+  const range = max - min;
+  const step = range > 2000 ? 500 : range > 500 ? 250 : 100;
+  const bands: PriceBand[] = [];
+  let start = Math.floor(min / step) * step;
+  while (start < max) {
+    const end = start + step;
+    bands.push({ min: start, max: end, label: `₹${start} – ₹${end}` });
+    start = end;
+  }
+  return bands;
+}
+
 export default function ProductBrowser({
   products,
   dense = false,
@@ -11,9 +33,10 @@ export default function ProductBrowser({
   products: PublicProduct[];
   dense?: boolean;
 }) {
-  const [color, setColor] = useState<string | null>(null);
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [priceBand, setPriceBand] = useState("");
+  const [color, setColor] = useState("");
+
+  const priceBands = useMemo(() => computePriceBands(products), [products]);
 
   const colors = useMemo(() => {
     const set = new Set<string>();
@@ -24,73 +47,64 @@ export default function ProductBrowser({
   }, [products]);
 
   const filtered = useMemo(() => {
-    const min = minPrice ? Number(minPrice) : null;
-    const max = maxPrice ? Number(maxPrice) : null;
+    const band = priceBand ? priceBands[Number(priceBand)] : null;
     return products.filter((p) => {
+      if (band && (p.sellingPrice < band.min || p.sellingPrice > band.max))
+        return false;
       if (color && p.color !== color) return false;
-      if (min !== null && p.sellingPrice < min) return false;
-      if (max !== null && p.sellingPrice > max) return false;
       return true;
     });
-  }, [products, color, minPrice, maxPrice]);
+  }, [products, priceBand, color, priceBands]);
 
-  const hasActiveFilters = color !== null || minPrice !== "" || maxPrice !== "";
+  const hasActiveFilters = priceBand !== "" || color !== "";
 
   function clearFilters() {
-    setColor(null);
-    setMinPrice("");
-    setMaxPrice("");
+    setPriceBand("");
+    setColor("");
   }
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap items-center gap-4">
-        <div className="flex items-center gap-2 text-xs">
-          <label htmlFor="min-price" className="text-ink/50">
-            ₹
-          </label>
-          <input
-            id="min-price"
-            type="number"
-            min={0}
-            inputMode="numeric"
-            placeholder="Min"
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
-            className="w-20 rounded-sm border border-ink/15 px-2 py-1.5 text-ink focus:border-gold focus:outline-none"
-          />
-          <span className="text-ink/30">–</span>
-          <label htmlFor="max-price" className="sr-only">
-            Max price
-          </label>
-          <input
-            id="max-price"
-            type="number"
-            min={0}
-            inputMode="numeric"
-            placeholder="Max"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-            className="w-20 rounded-sm border border-ink/15 px-2 py-1.5 text-ink focus:border-gold focus:outline-none"
-          />
-        </div>
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        {priceBands.length > 1 && (
+          <div className="flex items-center gap-2 text-xs">
+            <label htmlFor="price-range" className="text-ink/50">
+              Price Range
+            </label>
+            <select
+              id="price-range"
+              value={priceBand}
+              onChange={(e) => setPriceBand(e.target.value)}
+              className="rounded-sm border border-ink/15 bg-white px-2 py-1.5 text-ink focus:border-gold focus:outline-none"
+            >
+              <option value="">All Prices</option>
+              {priceBands.map((band, i) => (
+                <option key={i} value={i}>
+                  {band.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         {colors.length > 1 && (
-          <div className="flex flex-wrap items-center gap-1.5">
-            {colors.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setColor(color === c ? null : c)}
-                className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-                  color === c
-                    ? "border-gold bg-gold text-cream"
-                    : "border-ink/15 text-ink/70 hover:border-gold"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
+          <div className="flex items-center gap-2 text-xs">
+            <label htmlFor="filter-by" className="text-ink/50">
+              Filter By
+            </label>
+            <select
+              id="filter-by"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              className="rounded-sm border border-ink/15 bg-white px-2 py-1.5 text-ink focus:border-gold focus:outline-none"
+            >
+              <option value="">All Colors</option>
+              {colors.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
           </div>
         )}
 

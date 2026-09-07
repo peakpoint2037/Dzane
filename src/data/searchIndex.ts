@@ -73,6 +73,12 @@ export const searchIndex: SearchEntry[] = [
     keywords: ["new arrivals", "new", "latest"],
   },
   {
+    title: "Sale",
+    href: "/shop/sale",
+    description: "Discounted DZANE pieces, while stocks last.",
+    keywords: ["sale", "discount", "offer", "clearance"],
+  },
+  {
     title: "About Us",
     href: "/about",
     description: "Our story — founder Usha Balan and DZANE's journey.",

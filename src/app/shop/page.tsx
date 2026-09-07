@@ -34,6 +34,12 @@ const moreCollections = [
     cta: "Shop Now",
     gradient: "from-lavender via-cream-dark to-cream",
   },
+  {
+    title: "Sale",
+    href: "/shop/sale",
+    cta: "Shop Now",
+    gradient: "from-gold-light/40 via-cream-dark to-cream",
+  },
 ];
 
 export default function ShopPage() {
@@ -104,7 +110,7 @@ export default function ShopPage() {
             <h2 className="text-center font-serif text-2xl text-ink">
               More From DZANE
             </h2>
-            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
               {moreCollections.map((item) => (
                 <Link
                   key={item.href}
