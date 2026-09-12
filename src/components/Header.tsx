@@ -137,7 +137,7 @@ export default function Header() {
       {/* Mobile nav */}
       {menuOpen && (
         <nav
-          className="fixed inset-x-0 bottom-0 z-40 overflow-y-auto border-t border-ink/10 bg-lavender/30 lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-40 overflow-y-auto border-t border-ink/10 bg-lavender lg:hidden"
           style={{ top: headerHeight }}
         >
           <ul className="flex flex-col gap-1 px-6 py-4 text-sm font-medium text-ink">
