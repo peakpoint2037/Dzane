@@ -7,7 +7,7 @@ const N = 3600;
 // Below this viewport width, skip the effect entirely — it competes with the
 // hero's scroll-linked pin animation for the main thread/GPU, which is the
 // main source of scroll jank on phones. Matches Hero.tsx's own breakpoint.
-const MOBILE_BREAKPOINT_PX = 768;
+const MOBILE_BREAKPOINT_PX = 868;
 
 // Reference-sim constants (Golden Aura @ the brand site's tuned sliders).
 const SPEED = 0.2;

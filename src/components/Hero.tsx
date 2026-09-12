@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
@@ -86,8 +86,10 @@ const MAX_NATIVE_UPSCALE = 2.2;
 // viewport heights. 2.2 sits in the requested ~200-250vh range.
 const SCROLL_DISTANCE_VH = 220;
 
-// Where the final "Explore collection" button sends visitors.
-const CTA_HREF = "/#collection";
+// Where the final "Explore collection" button sends visitors. A route
+// navigates; a same-page hash (e.g. "/#collection") scrolls to that section
+// instead — see handleCtaClick.
+const CTA_HREF = "/shop/new-arrivals";
 
 // A small safety margin added to the image's rendered size so the subtle
 // mouse-tilt effect never reveals an edge of the photo.
@@ -160,6 +162,35 @@ function computeOpenTransform(viewportW: number, viewportH: number, image: HeroI
   };
 }
 
+// When CTA_HREF points at a section on this page, scroll to it by hand rather
+// than letting the browser follow the hash: once the URL already carries that
+// hash, a second click changes nothing, so the browser does nothing and the
+// button looks broken after its first use. For a plain route (the current
+// setting) this falls through to normal navigation, as do modifier-clicks so
+// that "open in new tab" keeps working.
+function handleCtaClick(event: ReactMouseEvent<HTMLAnchorElement>) {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return;
+  }
+
+  const targetId = CTA_HREF.split("#")[1];
+  const target = targetId ? document.getElementById(targetId) : null;
+  if (!target) return; // no such section — let normal navigation handle it
+
+  event.preventDefault();
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // scrollIntoView honours the target's `scroll-mt-*`, so it lands below the
+  // fixed header rather than underneath it.
+  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+}
+
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
@@ -201,7 +232,7 @@ export default function Hero() {
       // upscaled image — the difference is very visible on phones.
       gsap.set(image, { scale: open.zoom, x: open.x, y: open.y, transformOrigin: "50% 50%", force3D: true });
       gsap.set(scrollCue, { autoAlpha: 1 });
-      gsap.set(cta, { autoAlpha: 0 });
+      gsap.set(cta, { autoAlpha: 0, pointerEvents: "none" });
 
       const applyProgress = (progress: number) => {
         gsap.set(image, {
@@ -211,7 +242,12 @@ export default function Hero() {
           force3D: true,
         });
         gsap.set(scrollCue, { autoAlpha: 1 - clamp(progress / 0.12, 0, 1) });
-        gsap.set(cta, { autoAlpha: clamp((progress - 0.7) / 0.3, 0, 1) });
+        // pointerEvents is driven alongside the fade: at the bottom of the
+        // fade the button is still technically visible (opacity ~0.001), and
+        // without this it sits there as an invisible tap target in the middle
+        // of the hero, swallowing taps meant for the photo.
+        const ctaAlpha = clamp((progress - 0.7) / 0.3, 0, 1);
+        gsap.set(cta, { autoAlpha: ctaAlpha, pointerEvents: ctaAlpha > 0.4 ? "auto" : "none" });
       };
 
       // A smoothed scrub (a fixed lag behind the scroll position) feels nice
@@ -410,11 +446,14 @@ export default function Hero() {
       {/* Anchored to 100svh (the viewport with the mobile URL bar showing)
           rather than the section's bottom, so it stays on screen whether the
           bar is up or down — the section itself is a taller 100lvh. */}
-      <div className="absolute inset-x-0 bottom-10 flex justify-center px-6 max-md:bottom-auto max-md:top-[calc(100svh-80px)]">
+      {/* The wrapper spans the full width, so it must not take pointer events
+          itself — only the button inside it should be tappable. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-10 flex justify-center px-6 max-md:bottom-auto max-md:top-[calc(100svh-80px)]">
         <Link
           ref={ctaRef}
           href={CTA_HREF}
-          className="rounded-sm bg-olive px-8 py-3 text-xs font-semibold uppercase tracking-widest text-cream shadow-lg transition-colors hover:bg-olive-light"
+          onClick={handleCtaClick}
+          className="pointer-events-auto rounded-sm bg-olive px-8 py-3 text-xs font-semibold uppercase tracking-widest text-cream shadow-lg transition-colors hover:bg-olive-light max-md:py-4"
         >
           Explore Collection
         </Link>

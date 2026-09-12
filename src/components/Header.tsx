@@ -21,11 +21,28 @@ const SOLID_TRIGGER_VIEWPORT_FRACTION = 0.2;
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [solid, setSolid] = useState(!isHome);
   const headerRef = useRef<HTMLElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
+
+  // The menu and the search sheet both fill the screen below the header, so
+  // only one may be open at a time — otherwise you get two panels stacked
+  // and two close buttons in the header with no clue which does what.
+  const openMenu = (next: boolean) => {
+    setMenuOpen(next);
+    if (next) setSearchOpen(false);
+  };
+  const openSearch = (next: boolean) => {
+    setSearchOpen(next);
+    if (next) {
+      setMenuOpen(false);
+      setSearchQuery("");
+    }
+  };
 
   useEffect(() => {
     if (!isHome) return;
@@ -56,24 +73,36 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-  // Prevent the page behind the full-screen mobile menu from scrolling.
+  // Prevent the page behind the full-screen mobile menu or search sheet from
+  // scrolling underneath them.
   useEffect(() => {
-    if (!menuOpen) return;
+    if (!menuOpen && !searchOpen) return;
     const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = overflow;
     };
-  }, [menuOpen]);
+  }, [menuOpen, searchOpen]);
 
-  const transparent = isHome && !solid && !menuOpen;
+  const panelOpen = menuOpen || searchOpen;
+  const transparent = isHome && !solid && !panelOpen;
   const textColor = transparent ? "text-cream" : "text-ink";
 
   return (
     <header
       ref={headerRef}
       className={`${isHome ? "fixed" : "sticky"} inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        transparent ? "bg-transparent" : "bg-cream"
+        // While a full-screen panel is open the header has to match it,
+        // otherwise a white bar sits on top of the blush sheet. The menu is
+        // mobile-only; search is only a sheet below `sm` (a dropdown above),
+        // so above that the header keeps its normal colour.
+        menuOpen
+          ? "bg-lavender"
+          : searchOpen
+            ? "bg-lavender sm:bg-cream"
+            : transparent
+              ? "bg-transparent"
+              : "bg-cream"
       }`}
     >
       {/* Announcement bar */}
@@ -108,7 +137,7 @@ export default function Header() {
           <div className="-ml-2 flex items-center gap-2">
             <button
               type="button"
-              onClick={() => setMenuOpen((v) => !v)}
+              onClick={() => openMenu(!menuOpen)}
               className={`flex h-9 w-9 items-center justify-center lg:hidden ${textColor}`}
               aria-label="Toggle menu"
             >
@@ -128,8 +157,14 @@ export default function Header() {
             ))}
           </ul>
 
-          <div className={textColor}>
-            <SiteSearch />
+          <div className={`-mr-2 ${textColor}`}>
+            <SiteSearch
+              open={searchOpen}
+              onOpenChange={openSearch}
+              query={searchQuery}
+              onQueryChange={setSearchQuery}
+              headerHeight={headerHeight}
+            />
           </div>
         </div>
       </nav>
@@ -145,8 +180,8 @@ export default function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 uppercase tracking-wide transition-colors hover:text-gold"
+                  onClick={() => openMenu(false)}
+                  className="block py-3 uppercase tracking-wide transition-colors hover:text-gold"
                 >
                   {link.label}
                 </Link>
