@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Logo from "./Logo";
 import SiteSearch from "./SiteSearch";
 import { navLinks } from "@/data/nav";
 import {
@@ -10,91 +10,136 @@ import {
   ScissorsIcon,
   HeartIcon,
   TruckIcon,
-  UserIcon,
-  BagIcon,
   MenuIcon,
   CloseIcon,
 } from "./icons";
 
+// On the homepage, the header floats transparently over the hero photo until
+// the section right after it ("How We Work") scrolls up to this fraction of
+// the viewport height, then turns solid.
+const SOLID_TRIGGER_VIEWPORT_FRACTION = 0.2;
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const cartCount = 0;
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [solid, setSolid] = useState(!isHome);
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useEffect(() => {
+    if (!isHome) return;
+    const onScroll = () => {
+      const target = document.getElementById("how-we-work-section");
+      const top = target?.getBoundingClientRect().top ?? Infinity;
+      setSolid(top <= window.innerHeight * SOLID_TRIGGER_VIEWPORT_FRACTION);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isHome]);
+
+  // Measure the header's own height so the full-screen mobile menu can start
+  // right below it instead of a hardcoded pixel value (the header's height
+  // changes with the announcement bar and transparent/solid states).
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const measure = () => setHeaderHeight(header.offsetHeight);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
+  // Prevent the page behind the full-screen mobile menu from scrolling.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, [menuOpen]);
+
+  const transparent = isHome && !solid && !menuOpen;
+  const textColor = transparent ? "text-cream" : "text-ink";
 
   return (
-    <header className="sticky top-0 z-50 bg-cream">
+    <header
+      ref={headerRef}
+      className={`${isHome ? "fixed" : "sticky"} inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        transparent ? "bg-transparent" : "bg-cream"
+      }`}
+    >
       {/* Announcement bar */}
-      <div className="hidden bg-olive text-cream/90 md:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-[11px] tracking-wide">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5">
-              <LeafIcon className="h-3.5 w-3.5" />
-              PREMIUM QUALITY FABRICS
-            </span>
-            <span className="flex items-center gap-1.5">
-              <ScissorsIcon className="h-3.5 w-3.5" />
-              CUSTOM TAILORING
-            </span>
-            <span className="flex items-center gap-1.5">
-              <HeartIcon className="h-3.5 w-3.5" />
-              MADE WITH LOVE
+      {!transparent && (
+        <div className="hidden bg-olive text-cream/90 md:block">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-[11px] tracking-wide">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-1.5">
+                <LeafIcon className="h-3.5 w-3.5" />
+                PREMIUM QUALITY FABRICS
+              </span>
+              <span className="flex items-center gap-1.5">
+                <ScissorsIcon className="h-3.5 w-3.5" />
+                CUSTOM TAILORING
+              </span>
+              <span className="flex items-center gap-1.5">
+                <HeartIcon className="h-3.5 w-3.5" />
+                MADE WITH LOVE
+              </span>
+            </div>
+            <span className="flex items-center gap-1.5 text-cream">
+              Free Shipping on Orders Above ₹999
+              <TruckIcon className="h-3.5 w-3.5" />
             </span>
           </div>
-          <span className="flex items-center gap-1.5 text-cream">
-            Free Shipping on Orders Above ₹999
-            <TruckIcon className="h-3.5 w-3.5" />
-          </span>
         </div>
-      </div>
+      )}
 
-      {/* Main header */}
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center text-ink lg:hidden"
-            aria-label="Toggle menu"
+      {/* Nav (mobile menu toggle + category links + cart) */}
+      <nav className={transparent ? "" : "border-t border-ink/10"}>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+          <div className="-ml-2 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              className={`flex h-9 w-9 items-center justify-center lg:hidden ${textColor}`}
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
+            </button>
+          </div>
+
+          <ul
+            className={`hidden flex-1 items-center justify-center gap-8 text-xs font-medium tracking-wide lg:flex ${textColor}`}
           >
-            {menuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
-          </button>
-          <Logo compact />
-          <span className="text-shimmer self-start pt-1 text-[7px] font-semibold uppercase leading-tight tracking-[0.04em] sm:text-[11px] sm:tracking-[0.15em]">
-            Stitching Studio
-            <br />
-            and Premium Ladies Wear
-          </span>
-        </div>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="uppercase transition-colors hover:text-gold">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        <div className="flex items-center gap-5 text-ink">
-          <SiteSearch />
-          <Link href="/account" aria-label="Account" className="hover:text-gold">
-            <UserIcon className="h-5 w-5" />
-          </Link>
-          <Link href="/cart" aria-label="Cart" className="relative hover:text-gold">
-            <BagIcon className="h-5 w-5" />
-            <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-olive text-[10px] text-cream">
-              {cartCount}
-            </span>
-          </Link>
+          <div className={textColor}>
+            <SiteSearch />
+          </div>
         </div>
-      </div>
-
-      {/* Nav links */}
-      <nav className="hidden border-t border-ink/10 lg:block">
-        <ul className="mx-auto flex max-w-7xl items-center justify-center gap-8 px-6 py-3 text-xs font-medium tracking-wide text-ink">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href} className="uppercase transition-colors hover:text-gold">
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
       </nav>
 
       {/* Mobile nav */}
       {menuOpen && (
-        <nav className="border-t border-ink/10 lg:hidden">
+        <nav
+          className="fixed inset-x-0 bottom-0 z-40 overflow-y-auto border-t border-ink/10 bg-cream lg:hidden"
+          style={{ top: headerHeight }}
+        >
           <ul className="flex flex-col gap-1 px-6 py-4 text-sm font-medium text-ink">
             {navLinks.map((link) => (
               <li key={link.href}>

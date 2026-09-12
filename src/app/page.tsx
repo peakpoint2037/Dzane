@@ -4,7 +4,7 @@ import HowWeWorkSection from "@/components/HowWeWorkSection";
 import OffersSection from "@/components/OffersSection";
 import CategorySection from "@/components/CategorySection";
 import FamilyWearSection from "@/components/FamilyWearSection";
-import VisitStudioSection from "@/components/VisitStudioSection";
+// import VisitStudioSection from "@/components/VisitStudioSection";
 import TrustBar from "@/components/TrustBar";
 import ReviewsSection from "@/components/ReviewsSection";
 
@@ -17,7 +17,7 @@ export default function Home() {
         <HowWeWorkSection />
         <CategorySection />
         <FamilyWearSection />
-        <VisitStudioSection />
+        {/* <VisitStudioSection /> */}
         <TrustBar />
         <OffersSection />
         <ReviewsSection />

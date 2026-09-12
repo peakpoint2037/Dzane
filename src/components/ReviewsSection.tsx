@@ -15,8 +15,14 @@ function initials(name: string) {
 function ReviewCard({ review }: { review: Review }) {
   return (
     <div className="flex w-80 shrink-0 flex-col gap-3 overflow-hidden rounded-md border border-ink/10 bg-white shadow-sm">
-      {review.photo && (
-        <div className="relative aspect-[4/3] w-full bg-lavender sm:aspect-square">
+      <div
+        className={
+          review.photo
+            ? "relative aspect-[4/3] w-full bg-lavender sm:aspect-square"
+            : "relative flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br from-lavender to-lavender-dark sm:aspect-square"
+        }
+      >
+        {review.photo ? (
           <Image
             src={review.photo}
             alt={`${review.name} wearing DZANE`}
@@ -25,19 +31,16 @@ function ReviewCard({ review }: { review: Review }) {
             sizes="320px"
             className="object-cover object-top"
           />
-        </div>
-      )}
+        ) : (
+          <span className="font-serif text-3xl font-semibold text-gold">
+            {initials(review.name)}
+          </span>
+        )}
+      </div>
       <div className="flex flex-col gap-3 px-5 pb-5 pt-1 first:pt-5">
-        <div className="flex items-center gap-3">
-          {!review.photo && (
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-lavender font-serif text-sm font-semibold text-gold">
-              {initials(review.name)}
-            </span>
-          )}
-          <div>
-            <p className="text-sm font-semibold text-ink">{review.name}</p>
-            <p className="text-xs text-ink/50">{review.location}</p>
-          </div>
+        <div>
+          <p className="text-sm font-semibold text-ink">{review.name}</p>
+          <p className="text-xs text-ink/50">{review.location}</p>
         </div>
         <div className="flex items-center gap-0.5 text-gold">
           {Array.from({ length: 5 }).map((_, i) => (

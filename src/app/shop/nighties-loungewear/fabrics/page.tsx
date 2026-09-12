@@ -42,7 +42,7 @@ export default async function NightyFabricsPage() {
   return (
     <>
       <Header />
-      <main className="flex-1 bg-cream">
+      <main className="flex-1 bg-cream-dark">
         <section className="mx-auto max-w-5xl px-6 pt-10">
           <Link
             href="/shop/nighties-loungewear"
@@ -62,22 +62,6 @@ export default async function NightyFabricsPage() {
           <p className="mx-auto mt-2 max-w-md text-center text-sm text-ink/60">
             One flat rate on all nighty fabric.
           </p>
-
-          <div className="mx-auto mt-8 max-w-xs">
-            <div className="rounded-md border border-ink/10 bg-white p-6 text-center">
-              <p className="font-serif text-xl text-ink">Nighty Fabric</p>
-              <p className="mt-1 text-xs text-ink/60">
-                Soft cotton, stitched to your size
-              </p>
-              <div className="mt-4 flex items-baseline justify-center gap-2">
-                <span className="text-sm text-ink/40 line-through">₹250</span>
-                <span className="font-serif text-2xl text-gold">₹350</span>
-              </div>
-              <p className="mt-1 text-[11px] uppercase tracking-wide text-ink/40">
-                Fabric only &rarr; With stitching
-              </p>
-            </div>
-          </div>
 
           {items.length > 0 ? (
             <div className="mt-8">

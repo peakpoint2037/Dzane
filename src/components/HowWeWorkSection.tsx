@@ -24,6 +24,7 @@ const ways = [
 export default function HowWeWorkSection() {
   return (
     <section
+      id="how-we-work-section"
       className="border-t border-ink/10 bg-lavender/30 py-12"
       aria-labelledby="how-we-work"
     >
