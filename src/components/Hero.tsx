@@ -194,12 +194,16 @@ export default function Hero() {
         gsap.set(cta, { autoAlpha: clamp((progress - 0.7) / 0.3, 0, 1) });
       };
 
+      // A smoothed scrub (a fixed lag behind the scroll position) feels nice
+      // with a mouse wheel, but reads as laggy/unsmooth under a finger on
+      // touch devices, which expect the animation to track 1:1 with the
+      // gesture. `scrub: true` removes that lag on mobile.
       const scrollTrigger = ScrollTrigger.create({
         trigger: section,
         start: "top top",
         end: () => `+=${window.innerHeight * (SCROLL_DISTANCE_VH / 100)}`,
         pin: true,
-        scrub: 1,
+        scrub: initialImageKey === "mobile" ? true : 1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => applyProgress(self.progress),

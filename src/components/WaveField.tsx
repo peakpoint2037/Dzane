@@ -4,6 +4,11 @@ import { useEffect, useRef } from "react";
 
 const N = 3600;
 
+// Below this viewport width, skip the effect entirely — it competes with the
+// hero's scroll-linked pin animation for the main thread/GPU, which is the
+// main source of scroll jank on phones. Matches Hero.tsx's own breakpoint.
+const MOBILE_BREAKPOINT_PX = 768;
+
 // Reference-sim constants (Golden Aura @ the brand site's tuned sliders).
 const SPEED = 0.2;
 const TURB = 12;
@@ -94,6 +99,8 @@ export default function WaveField({ className }: { className?: string }) {
     // Respect the same reduced-motion preference as the rest of the hero:
     // leave the plain photo in place with no drifting overlay.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Skip on phones — see MOBILE_BREAKPOINT_PX above.
+    if (window.innerWidth < MOBILE_BREAKPOINT_PX) return;
 
     const gl = (canvas.getContext("webgl", {
       alpha: true,
