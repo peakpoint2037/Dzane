@@ -12,6 +12,10 @@ import heroShopMobilePhoto from "../../public/images/hero-shop-mobile.webp";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  // Mobile browsers fire `resize` mid-swipe as the URL bar collapses. Left
+  // alone, ScrollTrigger re-measures the pin right under the visitor's
+  // finger, which snaps the zoom backwards and shifts the page height.
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 // ---------------------------------------------------------------------------
@@ -187,8 +191,15 @@ export default function Hero() {
       let activeImage = HERO_IMAGES[initialImageKey];
 
       let open = computeOpenTransform(window.innerWidth, window.innerHeight, activeImage);
+      // Captured rather than read live from `innerHeight`, which on mobile
+      // changes as the URL bar collapses — that would move the pin's end
+      // point mid-swipe and jump the zoom. Recomputed on a real resize below.
+      let pinDistance = window.innerHeight * (SCROLL_DISTANCE_VH / 100);
 
-      gsap.set(image, { scale: open.zoom, x: open.x, y: open.y, transformOrigin: "50% 50%" });
+      // force3D keeps the photo on its own GPU layer between updates, so
+      // each scroll step composites instead of re-rasterising a 2-4x
+      // upscaled image — the difference is very visible on phones.
+      gsap.set(image, { scale: open.zoom, x: open.x, y: open.y, transformOrigin: "50% 50%", force3D: true });
       gsap.set(scrollCue, { autoAlpha: 1 });
       gsap.set(cta, { autoAlpha: 0 });
 
@@ -197,6 +208,7 @@ export default function Hero() {
           scale: gsap.utils.interpolate(open.zoom, 1, progress),
           x: gsap.utils.interpolate(open.x, 0, progress),
           y: gsap.utils.interpolate(open.y, 0, progress),
+          force3D: true,
         });
         gsap.set(scrollCue, { autoAlpha: 1 - clamp(progress / 0.12, 0, 1) });
         gsap.set(cta, { autoAlpha: clamp((progress - 0.7) / 0.3, 0, 1) });
@@ -209,7 +221,7 @@ export default function Hero() {
       const scrollTrigger = ScrollTrigger.create({
         trigger: section,
         start: "top top",
-        end: () => `+=${window.innerHeight * (SCROLL_DISTANCE_VH / 100)}`,
+        end: () => `+=${pinDistance}`,
         pin: true,
         scrub: initialImageKey === "mobile" ? true : 1,
         anticipatePin: 1,
@@ -258,7 +270,7 @@ export default function Hero() {
             ease: "power1.inOut",
             onUpdate: () => {
               root.style.scrollBehavior = "auto";
-              const target = introState.progress * (window.innerHeight * (SCROLL_DISTANCE_VH / 100));
+              const target = introState.progress * pinDistance;
               const maxScroll = root.scrollHeight - window.innerHeight;
               window.scrollTo(0, Math.min(target, maxScroll));
             },
@@ -283,23 +295,35 @@ export default function Hero() {
         else window.addEventListener("load", startIntro, { once: true });
       }
 
+      let lastWidth = window.innerWidth;
       const handleResize = () => {
+        lastWidth = window.innerWidth;
         const nextImageKey = pickImageKey(window.innerWidth);
         setImageKey(nextImageKey);
         activeImage = HERO_IMAGES[nextImageKey];
 
         open = computeOpenTransform(window.innerWidth, window.innerHeight, activeImage);
+        pinDistance = window.innerHeight * (SCROLL_DISTANCE_VH / 100);
         ScrollTrigger.refresh();
         applyProgress(scrollTrigger?.progress ?? 0);
       };
 
       let resizeTimer: ReturnType<typeof setTimeout>;
-      const onResize = () => {
+      const scheduleResize = (delay: number) => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(handleResize, 150);
+        resizeTimer = setTimeout(handleResize, delay);
       };
+      // Height-only resizes on a touch device are the URL bar collapsing or
+      // expanding during a swipe, not a real layout change. Re-measuring then
+      // is what makes the gesture stutter, so those are ignored; a rotation
+      // (which changes the width) still refreshes normally.
+      const onResize = () => {
+        if (window.innerWidth === lastWidth) return;
+        scheduleResize(150);
+      };
+      const onOrientationChange = () => scheduleResize(250);
       window.addEventListener("resize", onResize);
-      window.addEventListener("orientationchange", onResize);
+      window.addEventListener("orientationchange", onOrientationChange);
 
       const canTilt = window.matchMedia("(pointer: fine)").matches;
       let onPointerMove: ((event: PointerEvent) => void) | undefined;
@@ -323,7 +347,7 @@ export default function Hero() {
 
       return () => {
         window.removeEventListener("resize", onResize);
-        window.removeEventListener("orientationchange", onResize);
+        window.removeEventListener("orientationchange", onOrientationChange);
         if (onPointerMove) window.removeEventListener("pointermove", onPointerMove);
         clearTimeout(resizeTimer);
         if (cancelIntro) {
@@ -342,7 +366,10 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate z-10 h-dvh w-full overflow-hidden bg-cream-dark"
+      /* 100lvh, not 100dvh: the pin captures this height once, and a dvh
+         measured while the mobile URL bar is showing would leave a strip of
+         background exposed the moment the bar collapses. lvh always covers. */
+      className="relative isolate z-10 h-[100lvh] w-full overflow-hidden bg-cream-dark"
     >
       <div ref={tiltRef} className="absolute inset-0 will-change-transform">
         <Image
@@ -372,7 +399,7 @@ export default function Hero() {
       <div
         ref={scrollCueRef}
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-1 text-cream opacity-0"
+        className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-1 text-cream opacity-0 max-md:bottom-auto max-md:top-[calc(100svh-68px)]"
       >
         <span className="text-[10px] font-semibold uppercase tracking-[0.25em]">
           Scroll to explore
@@ -380,7 +407,10 @@ export default function Hero() {
         <ChevronDownIcon className="h-4 w-4 animate-bounce" />
       </div>
 
-      <div className="absolute inset-x-0 bottom-10 flex justify-center px-6">
+      {/* Anchored to 100svh (the viewport with the mobile URL bar showing)
+          rather than the section's bottom, so it stays on screen whether the
+          bar is up or down — the section itself is a taller 100lvh. */}
+      <div className="absolute inset-x-0 bottom-10 flex justify-center px-6 max-md:bottom-auto max-md:top-[calc(100svh-80px)]">
         <Link
           ref={ctaRef}
           href={CTA_HREF}
