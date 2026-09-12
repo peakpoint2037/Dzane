@@ -91,6 +91,14 @@ const TILT_OVERSCAN = 1.06;
 const TILT_MAX_DEG = 1.6;
 const TILT_MAX_PX = 10;
 
+// On load, the hero plays its own zoom-out: the page auto-scrolls slowly
+// through the pin until the reveal is complete and the "Explore Collection"
+// button has faded in. Expressed as a fraction of the pin's scroll distance,
+// so 1 = the full reveal. Cancelled the instant the visitor takes over.
+const INTRO_AUTO_PROGRESS = 1;
+const INTRO_AUTO_DURATION = 6;
+const INTRO_AUTO_DELAY = 0.5;
+
 // ---------------------------------------------------------------------------
 
 function clamp(value: number, min: number, max: number) {
@@ -209,6 +217,72 @@ export default function Hero() {
         onUpdate: (self) => applyProgress(self.progress),
       });
 
+      // Play the reveal automatically on load by scrolling the page itself,
+      // rather than tweening the image separately — to ScrollTrigger it's
+      // just ordinary scrolling, so handing off to the visitor mid-animation
+      // needs no state reconciliation. Skipped if the page didn't load at the
+      // top (e.g. a restored scroll position), and cancelled the instant the
+      // visitor scrolls, clicks, taps or presses a key.
+      let introTween: gsap.core.Tween | undefined;
+      let cancelIntro: (() => void) | undefined;
+      let startIntro: (() => void) | undefined;
+      if (window.scrollY < 10) {
+        // The document carries `scroll-behavior: smooth` for anchor links.
+        // Left on, each per-frame scrollTo below starts its own easing
+        // animation that the next frame immediately interrupts, so the page
+        // barely moves and then lurches — it has to be off while we drive the
+        // scroll ourselves. It gets re-asserted every frame rather than set
+        // once, because ScrollTrigger saves and restores this property around
+        // its own refreshes and would otherwise hand `smooth` back mid-run.
+        const root = document.documentElement;
+        const inheritedScrollBehavior = root.style.scrollBehavior;
+        const restoreScrollBehavior = () => {
+          root.style.scrollBehavior = inheritedScrollBehavior;
+        };
+
+        let cancelled = false;
+
+        startIntro = () => {
+          if (cancelled || window.scrollY > 10) return;
+          // Measurements have to be settled first: until ScrollTrigger has
+          // built its pin spacer the document isn't tall enough to scroll
+          // into, so the tween would stall against the page bottom and then
+          // lurch through the whole reveal once the spacer appeared.
+          ScrollTrigger.refresh();
+
+          const introState = { progress: 0 };
+          introTween = gsap.to(introState, {
+            progress: INTRO_AUTO_PROGRESS,
+            duration: INTRO_AUTO_DURATION,
+            delay: INTRO_AUTO_DELAY,
+            ease: "power1.inOut",
+            onUpdate: () => {
+              root.style.scrollBehavior = "auto";
+              const target = introState.progress * (window.innerHeight * (SCROLL_DISTANCE_VH / 100));
+              const maxScroll = root.scrollHeight - window.innerHeight;
+              window.scrollTo(0, Math.min(target, maxScroll));
+            },
+            onComplete: restoreScrollBehavior,
+          });
+        };
+
+        // pointerdown covers mouse, touch and pen — including a click on the
+        // CTA as it fades in, which would otherwise fight the running tween.
+        cancelIntro = () => {
+          cancelled = true;
+          introTween?.kill();
+          restoreScrollBehavior();
+        };
+        window.addEventListener("wheel", cancelIntro, { passive: true });
+        window.addEventListener("pointerdown", cancelIntro, { passive: true });
+        window.addEventListener("keydown", cancelIntro);
+
+        // Images still decoding can resize the document (and trigger a
+        // ScrollTrigger refresh) mid-animation, so wait for a settled page.
+        if (document.readyState === "complete") startIntro();
+        else window.addEventListener("load", startIntro, { once: true });
+      }
+
       const handleResize = () => {
         const nextImageKey = pickImageKey(window.innerWidth);
         setImageKey(nextImageKey);
@@ -252,6 +326,13 @@ export default function Hero() {
         window.removeEventListener("orientationchange", onResize);
         if (onPointerMove) window.removeEventListener("pointermove", onPointerMove);
         clearTimeout(resizeTimer);
+        if (cancelIntro) {
+          cancelIntro(); // kills the tween and restores `scroll-behavior`
+          window.removeEventListener("wheel", cancelIntro);
+          window.removeEventListener("pointerdown", cancelIntro);
+          window.removeEventListener("keydown", cancelIntro);
+        }
+        if (startIntro) window.removeEventListener("load", startIntro);
       };
     }, section);
 

@@ -4,7 +4,7 @@ import { categories } from "@/data/categories";
 
 export default function CategorySection() {
   return (
-    <section id="collection" className="bg-cream scroll-mt-24" aria-labelledby="shop-by-category">
+    <section id="collection" className="bg-cream scroll-mt-24 pt-4" aria-labelledby="shop-by-category">
       <div className="mx-auto max-w-7xl px-6 pb-16">
         <h2 id="shop-by-category" className="sr-only">
           Shop by category
