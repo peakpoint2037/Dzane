@@ -14,7 +14,7 @@ const options = [
     description:
       "Pick our fabric at one flat rate and we'll stitch it to your size.",
     href: "/shop/nighties-loungewear/fabrics",
-    image: "/images/category-nighties-v2.png",
+    image: "/images/category-nighties-v2.webp",
   },
   {
     title: "Ready Made Nighties",

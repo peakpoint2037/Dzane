@@ -21,7 +21,7 @@ export default function Logo({
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- local SVG/PNG, next/image disallows unoptimized local SVGs by default */}
       <img
-        src={variant === "gold" ? "/images/logo.png" : "/images/logo-black.svg"}
+        src={variant === "gold" ? "/images/logo.webp" : "/images/logo-black.svg"}
         alt="DZANE"
         width={1000}
         height={1000}

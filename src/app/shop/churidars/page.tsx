@@ -17,15 +17,15 @@ export const metadata = {
 
 const gallery = [
   {
-    src: "/images/hero-banner-yellow.png",
+    src: "/images/hero-banner-yellow.webp",
     alt: "Woman wearing a pastel yellow embroidered churidar set from DZANE",
   },
   {
-    src: "/images/hero-banner-rust.png",
+    src: "/images/hero-banner-rust.webp",
     alt: "Woman wearing a rust polka dot kurta from DZANE",
   },
   {
-    src: "/images/hero-banner-red.png",
+    src: "/images/hero-banner-red.webp",
     alt: "Woman wearing a red embroidered kurta from DZANE",
   },
 ];
@@ -53,7 +53,7 @@ export default async function ChuridarsPage() {
       <main className="flex-1 bg-cream">
         <section className="relative aspect-[16/7] w-full overflow-hidden bg-lavender">
           <Image
-            src="/images/hero-banner-yellow.png"
+            src="/images/hero-banner-yellow.webp"
             alt="Churidar Fabrics from DZANE"
             fill
             priority

@@ -73,7 +73,7 @@ export default function CustomStitchingPage() {
       <main className="flex-1 bg-cream">
         <section className="relative aspect-[16/7] w-full overflow-hidden bg-lavender">
           <Image
-            src="/images/hero-banner-beige.png"
+            src="/images/hero-banner-beige.webp"
             alt="Custom stitching at DZANE"
             fill
             priority

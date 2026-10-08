@@ -7,21 +7,21 @@ const items = [
     subtitle: "Earrings, bangles & necklace sets",
     href: "/shop/jewellery",
     gradient: "from-rose-100 via-cream-dark to-cream",
-    image: "/images/family-jewellery-v3.png",
+    image: "/images/family-jewellery-v3.webp",
   },
   {
     title: "Kids Wear",
     subtitle: "Comfy, playful & festive picks",
     href: "/shop/kids",
     gradient: "from-amber-100 via-cream-dark to-cream",
-    image: "/images/family-kids-wear-v2.png",
+    image: "/images/family-kids-wear-v2.webp",
   },
   {
     title: "Men's Wear",
     subtitle: "Shirts, kurtas & ethnic sets",
     href: "/shop/mens",
     gradient: "from-stone-200 via-cream-dark to-cream",
-    image: "/images/family-mens-wear-v2.png",
+    image: "/images/family-mens-wear-v2.webp",
   },
 ];
 

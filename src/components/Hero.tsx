@@ -102,8 +102,8 @@ const TILT_MAX_PX = 10;
 // button has faded in. Expressed as a fraction of the pin's scroll distance,
 // so 1 = the full reveal. Cancelled the instant the visitor takes over.
 const INTRO_AUTO_PROGRESS = 1;
-const INTRO_AUTO_DURATION = 3;
-const INTRO_AUTO_DELAY = 0.5;
+const INTRO_AUTO_DURATION = 0.8;
+const INTRO_AUTO_DELAY = 0;
 
 // ---------------------------------------------------------------------------
 

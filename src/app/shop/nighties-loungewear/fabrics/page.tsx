@@ -17,11 +17,11 @@ export const metadata = {
 
 const gallery: { src?: string; alt: string }[] = [
   {
-    src: "/images/category-nighties-v2.png",
+    src: "/images/category-nighties-v2.webp",
     alt: "Woman wearing lilac nightwear from DZANE",
   },
   {
-    src: "/images/hero-banner-lavender.png",
+    src: "/images/hero-banner-lavender.webp",
     alt: "Woman wearing lavender nightwear from DZANE",
   },
   {

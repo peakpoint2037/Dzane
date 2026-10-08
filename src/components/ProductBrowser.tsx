@@ -35,6 +35,7 @@ export default function ProductBrowser({
 }) {
   const [priceBand, setPriceBand] = useState("");
   const [color, setColor] = useState("");
+  const [visibleCount, setVisibleCount] = useState(24);
 
   const priceBands = useMemo(() => computePriceBands(products), [products]);
 
@@ -59,6 +60,7 @@ export default function ProductBrowser({
   const hasActiveFilters = priceBand !== "" || color !== "";
 
   function clearFilters() {
+    setVisibleCount(24);
     setPriceBand("");
     setColor("");
   }
@@ -74,7 +76,7 @@ export default function ProductBrowser({
             <select
               id="price-range"
               value={priceBand}
-              onChange={(e) => setPriceBand(e.target.value)}
+              onChange={(e) => { setPriceBand(e.target.value); setVisibleCount(24); }}
               className="rounded-sm border border-ink/15 bg-white px-2 py-1.5 text-ink focus:border-gold focus:outline-none"
             >
               <option value="">All Prices</option>
@@ -95,7 +97,7 @@ export default function ProductBrowser({
             <select
               id="filter-by"
               value={color}
-              onChange={(e) => setColor(e.target.value)}
+              onChange={(e) => { setColor(e.target.value); setVisibleCount(24); }}
               className="rounded-sm border border-ink/15 bg-white px-2 py-1.5 text-ink focus:border-gold focus:outline-none"
             >
               <option value="">All Colors</option>
@@ -120,7 +122,20 @@ export default function ProductBrowser({
       </div>
 
       {filtered.length > 0 ? (
-        <ProductGrid products={filtered} dense={dense} />
+        <>
+          <ProductGrid products={filtered.slice(0, visibleCount)} dense={dense} />
+          {visibleCount < filtered.length && (
+            <div className="mt-8 text-center">
+              <button
+                type="button"
+                onClick={() => setVisibleCount((count) => count + 24)}
+                className="rounded-sm bg-olive px-8 py-3 text-sm text-cream"
+              >
+                Show more products ({filtered.length - visibleCount} remaining)
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <p className="rounded-md border border-dashed border-ink/15 bg-white/40 px-6 py-10 text-center text-sm text-ink/50">
           No products match these filters.

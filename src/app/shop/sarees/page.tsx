@@ -17,7 +17,7 @@ export const metadata = {
 
 const gallery = [
   {
-    src: "/images/category-sarees-v3.png",
+    src: "/images/category-sarees-v3.webp",
     alt: "Woman wearing a plum saree from DZANE",
   },
 ];
@@ -45,7 +45,7 @@ export default async function SareesPage() {
       <main className="flex-1 bg-cream">
         <section className="relative aspect-[16/7] w-full overflow-hidden bg-lavender">
           <Image
-            src="/images/hero-banner-plum-saree.png"
+            src="/images/hero-banner-plum-saree.webp"
             alt="Sarees from DZANE"
             fill
             priority

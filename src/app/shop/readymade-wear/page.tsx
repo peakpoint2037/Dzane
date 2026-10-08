@@ -17,11 +17,11 @@ export const metadata = {
 
 const gallery = [
   {
-    src: "/images/category-premium-wear-v3.png",
+    src: "/images/category-premium-wear-v3.webp",
     alt: "Woman wearing a readymade pink kurta set from DZANE",
   },
   {
-    src: "/images/hero-banner-white-floral.png",
+    src: "/images/hero-banner-white-floral.webp",
     alt: "Woman wearing a readymade white floral co-ord set from DZANE",
   },
 ];
@@ -49,7 +49,7 @@ export default async function ReadymadeWearPage() {
       <main className="flex-1 bg-cream">
         <section className="relative aspect-[16/7] w-full overflow-hidden bg-lavender">
           <Image
-            src="/images/category-premium-wear-v3.png"
+            src="/images/category-premium-wear-v3.webp"
             alt="Readymade Wear from DZANE"
             fill
             priority
