@@ -21,7 +21,7 @@ const options = [
     description:
       "Finished nighties by Nakshatra, ready to wear — no stitching wait.",
     href: "/shop/nighties-loungewear/ready-made",
-    gradient: "from-lavender via-cream-dark to-cream",
+    image: "/images/readymade-nighties-cover.jpg",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function NightiesHubPage() {
                   className={
                     option.image
                       ? "relative aspect-[4/5] bg-lavender"
-                      : `relative flex aspect-[4/5] items-center justify-center bg-gradient-to-br ${option.gradient}`
+                      : "relative flex aspect-[4/5] items-center justify-center bg-lavender"
                   }
                 >
                   {option.image ? (
