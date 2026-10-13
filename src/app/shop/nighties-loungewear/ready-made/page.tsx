@@ -26,7 +26,7 @@ const stitchingContact = whatsappContacts.find(
 
 export default async function ReadyMadeNightiesPage() {
   const { items } = await fetchProducts({
-    category: "ready-made-nighty",
+    category: "ready-made-nighties",
     limit: 100,
   });
 
