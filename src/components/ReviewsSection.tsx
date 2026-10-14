@@ -17,7 +17,9 @@ function ReviewCard({ review }: { review: Review }) {
     <div className="flex w-80 shrink-0 flex-col gap-3 overflow-hidden rounded-md border border-ink/10 bg-white shadow-sm">
       <div
         className={
-          review.photo
+          review.kind === "studio-story"
+            ? "relative aspect-[2/3] w-full bg-lavender"
+            : review.photo
             ? "relative aspect-[4/3] w-full bg-lavender sm:aspect-square"
             : "relative flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br from-lavender to-lavender-dark sm:aspect-square"
         }
@@ -29,7 +31,7 @@ function ReviewCard({ review }: { review: Review }) {
             fill
             quality={90}
             sizes="320px"
-            className={review.kind === "studio-story" ? "object-contain" : "object-cover object-top"}
+            className={review.kind === "studio-story" ? "object-cover object-[50%_20%]" : "object-cover object-top"}
           />
         ) : (
           <span className="font-serif text-3xl font-semibold text-gold">
