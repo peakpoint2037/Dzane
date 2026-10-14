@@ -1,13 +1,22 @@
 export type Review = {
   name: string;
-  location: string;
-  rating: number;
+  location?: string;
+  rating?: number;
+  kind?: "studio-story";
   product: string;
   comment: string;
   photo?: string;
 };
 
 export const reviews: Review[] = [
+  {
+    name: "Sreekala",
+    kind: "studio-story",
+    product: "DZANE Fabric + Studio Stitching",
+    comment:
+      "From a fabric she chose at DZANE to an outfit stitched in our studio, Sreekala brings this lovely lavender floral look to life. Thank you, Sreekala, for choosing DZANE to be part of your style story.",
+    photo: "/images/customer-sreekala.webp",
+  },
   {
     name: "Anju Sivan",
     location: "Idukki",

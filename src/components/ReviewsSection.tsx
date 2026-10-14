@@ -29,7 +29,7 @@ function ReviewCard({ review }: { review: Review }) {
             fill
             quality={90}
             sizes="320px"
-            className="object-cover object-top"
+            className={review.kind === "studio-story" ? "object-contain" : "object-cover object-top"}
           />
         ) : (
           <span className="font-serif text-3xl font-semibold text-gold">
@@ -40,21 +40,21 @@ function ReviewCard({ review }: { review: Review }) {
       <div className="flex flex-col gap-3 px-5 pb-5 pt-1 first:pt-5">
         <div>
           <p className="text-sm font-semibold text-ink">{review.name}</p>
-          <p className="text-xs text-ink/50">{review.location}</p>
+          {review.location && <p className="text-xs text-ink/50">{review.location}</p>}
         </div>
-        <div className="flex items-center gap-0.5 text-gold">
+        {review.rating !== undefined && <div className="flex items-center gap-0.5 text-gold">
           {Array.from({ length: 5 }).map((_, i) => (
             <StarIcon
               key={i}
-              className={`h-3.5 w-3.5 ${i < review.rating ? "text-gold" : "text-ink/15"}`}
+              className={`h-3.5 w-3.5 ${i < (review.rating ?? 0) ? "text-gold" : "text-ink/15"}`}
             />
           ))}
-        </div>
+        </div>}
         <p className="text-sm leading-relaxed text-ink/70">
-          &ldquo;{review.comment}&rdquo;
+          {review.kind === "studio-story" ? review.comment : <> &ldquo;{review.comment}&rdquo;</>}
         </p>
         <p className="text-[11px] font-medium uppercase tracking-wide text-ink/40">
-          Verified Purchase &middot; {review.product}
+          {review.kind === "studio-story" ? "DZANE Customer Story" : "Verified Purchase"} &middot; {review.product}
         </p>
       </div>
     </div>
@@ -81,7 +81,7 @@ export default function ReviewsSection() {
         Loved by Our Customers
       </h2>
       <p className="mx-auto mt-2 max-w-md px-6 text-center text-sm text-ink/60">
-        Real reviews from women who&apos;ve worn DZANE.
+        Customer stories and reviews from women who&apos;ve worn DZANE.
       </p>
 
       <div className="mt-10 overflow-hidden">
