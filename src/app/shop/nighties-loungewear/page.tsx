@@ -14,14 +14,14 @@ const options = [
     description:
       "Pick our fabric at one flat rate and we'll stitch it to your size.",
     href: "/shop/nighties-loungewear/fabrics",
-    image: "/images/category-nighties-v2.webp",
+    image: "/images/readymade-nighties-cover.jpg",
   },
   {
     title: "Ready Made Nighties",
     description:
       "Finished nighties by Nakshatra, ready to wear — no stitching wait.",
     href: "/shop/nighties-loungewear/ready-made",
-    image: "/images/readymade-nighties-cover.jpg",
+    image: "/images/category-nighties-v2.webp",
   },
 ];
 
